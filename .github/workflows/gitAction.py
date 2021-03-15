@@ -17,7 +17,6 @@ def DBConnection(sql, values):
 		cursor.close()
 		db.close()
 
-
 def processDB(change, pathFile):
 	print("***Evaluate type change")
 	jiraID = pathFile.split("/")[1].split(".yml")[0]
