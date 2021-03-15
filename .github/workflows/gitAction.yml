@@ -16,6 +16,7 @@ jobs:
       - run : |
           ls -R
           echo $GITHUB_WORKSPACE
+          ls -R $GITHUB_WORKSPACE
       #- name: Check directory
         #run: |
           #rm -rf $GITHUB_WORKSPACE/test_validations
