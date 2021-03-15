@@ -19,11 +19,11 @@ jobs:
           #ls -R $GITHUB_WORKSPACE
       - name: Check directory
         run: |
-          rm -rf $GITHUB_WORKSPACE/test_validations
+          rm -rf $GITHUB_WORKSPACE/validaciones_thor
           git checkout
           git clone https://ja-valverde:ffecd97b05caeb491e35fe99986260e5e90582b5@github.com/ja-valverde/validaciones_thor.git
           echo $GITHUB_WORKSPACE
-          ls -R $GITHUB_WORKSPACE/test_validations
+          ls -R $GITHUB_WORKSPACE/validaciones_thor
 
       - name: Run script
         #run: python3 $GITHUB_WORKSPACE/test_validations/.github/workflows/test_python.py $GITHUB_WORKSPACE/test_validations
