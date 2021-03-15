@@ -11,7 +11,7 @@ on:
 jobs:
   first-job:
     name: GithubAction python2 test
-    runs-on: [self-hosted, Linux, X64, ConnectionGoogle, docker]
+    runs-on: [self-hosted, Linux, X64,  ConnectionGoogle, docker]
     steps:
       - uses: actions/checkout@v2
       - run : |
