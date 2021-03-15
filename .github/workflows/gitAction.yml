@@ -1,0 +1,33 @@
+# your-repo-name/.github/workflows/first_workflow.yml
+name: Launch git action
+# se ejecuta cuando se mergea
+on:
+  push
+#  pull_request:
+#    types: [closed]
+#    branches:
+#      - main
+
+jobs:
+  first-job:
+    name: GithubAction python2 test
+    runs-on: [self-hosted, Linux, X64, ConnectionGoogle, docker]
+    steps:
+      - uses: actions/checkout@v2
+      - run : |
+          ls -R
+          echo $GITHUB_WORKSPACE
+      #- name: Check directory
+        #run: |
+          #rm -rf $GITHUB_WORKSPACE/test_validations
+          #git checkout
+          #git clone https://ja-valverde:ffecd97b05caeb491e35fe99986260e5e90582b5@github.com/ja-valverde/test_validations.git
+          #echo $GITHUB_WORKSPACE
+          #ls -R $GITHUB_WORKSPACE/test_validations
+
+      - name: Run script
+        #run: python3 $GITHUB_WORKSPACE/test_validations/.github/workflows/test_python.py $GITHUB_WORKSPACE/test_validations
+        run: python3 $GITHUB_WORKSPACE/.github/workflows/test_python.py $GITHUB_WORKSPACE
+        env:
+          DB_USER_NAME : ${{secrets.DB_USER_NAME}}
+          DB_PASSWORD : ${{secrets.DB_PASSWORD}}
