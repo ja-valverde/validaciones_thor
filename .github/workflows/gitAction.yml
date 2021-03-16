@@ -12,25 +12,25 @@ jobs:
     name: GithubAction python2 test
     runs-on: [self-hosted, Linux, X64,  ConnectionGoogle, dockerValidaciones]
     steps:
-      #- uses: actions/checkout@v2
-      #- run : |
-          #echo $GITHUB_WORKSPACE
-          #ls -R $GITHUB_WORKSPACE
-      - name: Check directory
-        run: |
-          rm -rf $GITHUB_WORKSPACE/validaciones_thor
-          git checkout
-          git clone https://ja-valverde:ffecd97b05caeb491e35fe99986260e5e90582b5@github.com/ja-valverde/validaciones_thor.git
+      - uses: actions/checkout@v2
+      - run : |
           echo $GITHUB_WORKSPACE
-          ls -R $GITHUB_WORKSPACE/validaciones_thor
-          ls -la $GITHUB_WORKSPACE/validaciones_thor
+          ls -R $GITHUB_WORKSPACE
+      #- name: Check directory
+        #run: |
+          #rm -rf $GITHUB_WORKSPACE/validaciones_thor
+          #git checkout
+          #git clone https://ja-valverde:ffecd97b05caeb491e35fe99986260e5e90582b5@github.com/ja-valverde/validaciones_thor.git
+          #echo $GITHUB_WORKSPACE
+          #ls -R $GITHUB_WORKSPACE/validaciones_thor
+          #ls -la $GITHUB_WORKSPACE/validaciones_thor
 
 
       - name: Run script
         #run when clone repository:
-        run: python3 $GITHUB_WORKSPACE/validaciones_thor/.github/workflows/gitAction.py $GITHUB_WORKSPACE/validaciones_thor
+        #run: python3 $GITHUB_WORKSPACE/validaciones_thor/.github/workflows/gitAction.py $GITHUB_WORKSPACE/validaciones_thor
         # run when checkout:
-        #run: python3 $GITHUB_WORKSPACE/.github/workflows/gitAction.py $GITHUB_WORKSPACE
+        run: python3 $GITHUB_WORKSPACE/.github/workflows/gitAction.py $GITHUB_WORKSPACE
         env:
           DB_USER_NAME : ${{secrets.DB_USER_NAME}}
           DB_PASSWORD : ${{secrets.DB_PASSWORD}}
