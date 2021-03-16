@@ -7,15 +7,14 @@ import mysql.connector
 def DBConnection(sql, values):
 	try:
 		print("Execute query -> "+sql)
-		print("Execute values -> "+values)
 		db = mysql.connector.connect(host="10.95.235.233", user="thor", password="thor_deployments", database="test")
-		cursor = db.cursor()
-		cursor.execute(sql, values)
+		cr = db.cursor()
+		cr.execute(sql, values)
 		db.commit()
 	except mysql.connector.Error as error:
 		print("Failed to connet in the table {}".format(error))
 	finally:
-		cursor.close()
+		cr.close()
 		db.close()
 
 def processDB(change, pathFile, fileChanged):
@@ -83,7 +82,6 @@ def main(args):
 	path = sys.argv[1]
 	type, pathFile, fileChanged = getChange(path)
 	processDB(type, pathFile, fileChanged)
-
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
