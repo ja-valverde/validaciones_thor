@@ -41,7 +41,7 @@ def processDB(change, pathFile, fileChanged):
 		DBConnection(sql, values)
 	elif change == "D":
 		print("Delete a validation into table")
-		sql = "DELETE FROM test_thor4p WHERE idJira = %s"
+		sql = "DELETE FROM test_thor4p WHERE idJira = '%s'"
 		DBConnection(sql,idJira)
 	elif change == "M":
 		print("Modificate a validation")
