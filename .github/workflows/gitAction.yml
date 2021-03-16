@@ -24,9 +24,11 @@ jobs:
           git clone https://ja-valverde:ffecd97b05caeb491e35fe99986260e5e90582b5@github.com/ja-valverde/validaciones_thor.git
           echo $GITHUB_WORKSPACE
           ls -R $GITHUB_WORKSPACE/validaciones_thor
+          ls -la $GITHUB_WORKSPACE/validaciones_thor
+
 
       - name: Run script
-        run: python3 $GITHUB_WORKSPACE/test_validations/.github/workflows/test_python.py $GITHUB_WORKSPACE/test_validations
+        run: python3 $GITHUB_WORKSPACE/validaciones_thor/.github/workflows/test_python.py $GITHUB_WORKSPACE/test_validations
         #run: python3 $GITHUB_WORKSPACE/.github/workflows/test_python.py $GITHUB_WORKSPACE
         env:
           DB_USER_NAME : ${{secrets.DB_USER_NAME}}
