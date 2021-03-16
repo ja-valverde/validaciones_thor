@@ -7,6 +7,7 @@ import mysql.connector
 def DBConnection(sql, values):
 	try:
 		print("Execute query -> "+sql)
+		print("Execute values -> "+values)
 		db = mysql.connector.connect(host="10.95.235.233", user="thor", password="thor_deployments", database="test")
 		cursor = db.cursor()
 		cursor.execute(sql, values)
@@ -41,8 +42,8 @@ def processDB(change, pathFile, fileChanged):
 		DBConnection(sql, values)
 	elif change == "D":
 		print("Delete a validation into table")
-		sql = "DELETE FROM test_thor4p WHERE idJira = '%s'"
-		DBConnection(sql,idJira)
+		sql = "DELETE FROM test_thor4p WHERE idJira = '%s'" %(idJira)
+		DBConnection(sql,"")
 	elif change == "M":
 		print("Modificate a validation")
 		with open(pathFile, 'r') as file:
