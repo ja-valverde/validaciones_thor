@@ -1,9 +1,0 @@
-- dataset_id: Mobile_Line
-  dataset_version: 6
-  description: Number OPERATOR_ID
-  field: BILLING_ACCOUNT_ID
-  id: Fixed_Line!4!BILLING_ACCOUNT_ID-COUNTOPERATOR_ID
-  metrics:
-  - result
-  sources: []
-  sql: SELECT COUNT(DISTINCT t1.OPERATOR_ID) as result FROM validation_data_table t1
