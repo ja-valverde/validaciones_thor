@@ -6,7 +6,7 @@ import mysql.connector
 
 def DBConnection(sql, values):
 	try:
-		print("***Execute query")
+		print("Execute query -> "+sql)
 		db = mysql.connector.connect(host="10.95.235.233", user="thor", password="thor_deployments", database="test")
 		cursor = db.cursor()
 		cursor.execute(sql, values)
@@ -18,10 +18,10 @@ def DBConnection(sql, values):
 		db.close()
 
 def processDB(change, pathFile):
-	print("***Evaluate type change")
+	print("Type change: "+change)
 	idJira = pathFile.split("/")[1].split(".yml")[0]
 	if change == "A":
-		print("***Retrieving information of yaml")
+		print("Add new validation")
 		with open(pathFile, 'r') as file:
 			field_list = yaml.safe_load(file)
 			print(field_list)
@@ -35,15 +35,15 @@ def processDB(change, pathFile):
 				metrics_value = '|'.join(s for s in f['metrics'])
 				sources = '|'.join(s for s in f['sources'])
 				values = (entity, version, id_validation, field, description, metrics_value, sources, query, idJira)
-		print("***Insert new validation into table")
+		print("Insert new validation into table")
 		sql = "INSERT INTO test_thor4p (entity,version,id,field,description,metrics_value,sources,query,idJira) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 		DBConnection(sql, values)
 	elif change == "D":
-		print("***Delete a validation into table")
+		print("Delete a validation into table")
 		sql = "DELETE FROM test_thor4p WHERE idJira) values (%s)"
 		DBConnection(sql,idJira)
 	elif change == "M":
-		print("**Modificate a validation")
+		print("Modificate a validation")
 		with open(pathFile, 'r') as file:
 			field_list = yaml.safe_load(file)
 			print(field_list)
@@ -70,8 +70,6 @@ def getChange(path):
 	commit = repo.git.diff('HEAD~1..HEAD', name_status=True)
 	type = commit.split("\t")[0]
 	fileChanged = commit.split("\t")[1]
-	print("***typeChange:  " + type)
-	print("***filePath:  " + fileChanged)
 	pathFile = path + "/" + fileChanged
 	return type, pathFile
 
