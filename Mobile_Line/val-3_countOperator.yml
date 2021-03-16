@@ -1,7 +1,7 @@
 - dataset_id: Mobile_Line
   dataset_version: 6
   description: Number of different OPERATOR_ID
-  field: B5_BILLING_ACCOUNT_ID
+  field: BILLING_ACCOUNT_ID
   id: Fixed_Line!4!BILLING_ACCOUNT_ID-COUNTOPERATOR_ID
   metrics:
   - result
