@@ -26,8 +26,8 @@ jobs:
           ls -R $GITHUB_WORKSPACE/validaciones_thor
 
       - name: Run script
-        #run: python3 $GITHUB_WORKSPACE/test_validations/.github/workflows/test_python.py $GITHUB_WORKSPACE/test_validations
-        run: python3 $GITHUB_WORKSPACE/.github/workflows/test_python.py $GITHUB_WORKSPACE
+        run: python3 $GITHUB_WORKSPACE/test_validations/.github/workflows/test_python.py $GITHUB_WORKSPACE/test_validations
+        #run: python3 $GITHUB_WORKSPACE/.github/workflows/test_python.py $GITHUB_WORKSPACE
         env:
           DB_USER_NAME : ${{secrets.DB_USER_NAME}}
           DB_PASSWORD : ${{secrets.DB_PASSWORD}}
