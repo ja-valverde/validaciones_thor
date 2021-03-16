@@ -14,7 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run : |
-          ls -R
           echo $GITHUB_WORKSPACE
           ls -R $GITHUB_WORKSPACE
       #- name: Check directory
@@ -28,8 +27,10 @@ jobs:
 
 
       - name: Run script
-        run: python3 $GITHUB_WORKSPACE/validaciones_thor/.github/workflows/gitAction.py $GITHUB_WORKSPACE/validaciones_thor
-        #run: python3 $GITHUB_WORKSPACE/.github/workflows/gitAction.py $GITHUB_WORKSPACE
+        # run when clone repository:
+        #run: python3 $GITHUB_WORKSPACE/validaciones_thor/.github/workflows/gitAction.py $GITHUB_WORKSPACE/validaciones_thor
+        # run when checkout:
+        run: python3 $GITHUB_WORKSPACE/.github/workflows/gitAction.py $GITHUB_WORKSPACE
         env:
           DB_USER_NAME : ${{secrets.DB_USER_NAME}}
           DB_PASSWORD : ${{secrets.DB_PASSWORD}}
