@@ -17,9 +17,10 @@ def DBConnection(sql, values):
 		cursor.close()
 		db.close()
 
-def processDB(change, pathFile):
+def processDB(change, pathFile, fileChanged):
 	print("Type change: "+change)
-	idJira = pathFile.split("/")[1].split(".yml")[0]
+	idJira = fileChanged.split("/")[1].split(".yml")[0]
+	print ("idJira" + idJira)
 	if change == "A":
 		print("Add new validation")
 		with open(pathFile, 'r') as file:
@@ -73,14 +74,14 @@ def getChange(path):
 	pathFile = path + "/" + fileChanged
 	print ("type" + type)
 	print ("pathFile" + pathFile)
-	return type, pathFile
+	return type, pathFile, fileChanged
 
 
 def main(args):
 	print("Inicializacion")
 	path = sys.argv[1]
-	type, pathFile = getChange(path)
-	processDB(type, pathFile)
+	type, pathFile, fileChanged = getChange(path)
+	processDB(type, pathFile, fileChanged)
 
 
 if __name__ == "__main__":
