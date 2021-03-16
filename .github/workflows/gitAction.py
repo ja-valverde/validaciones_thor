@@ -40,7 +40,7 @@ def processDB(change, pathFile):
 		DBConnection(sql, values)
 	elif change == "D":
 		print("Delete a validation into table")
-		sql = "DELETE FROM test_thor4p WHERE idJira) values (%s)"
+		sql = "DELETE FROM test_thor4p WHERE idJira = %s"
 		DBConnection(sql,idJira)
 	elif change == "M":
 		print("Modificate a validation")
@@ -71,6 +71,8 @@ def getChange(path):
 	type = commit.split("\t")[0]
 	fileChanged = commit.split("\t")[1]
 	pathFile = path + "/" + fileChanged
+	print ("type" + type)
+	print ("pathFile" + pathFile)
 	return type, pathFile
 
 
