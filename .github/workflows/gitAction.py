@@ -19,7 +19,7 @@ def DBConnection(sql, values):
 
 def processDB(change, pathFile):
 	print("***Evaluate type change")
-	jiraID = pathFile.split("/")[1].split(".yml")[0]
+	idJira = pathFile.split("/")[1].split(".yml")[0]
 	if change == "A":
 		print("***Retrieving information of yaml")
 		with open(pathFile, 'r') as file:
@@ -34,14 +34,14 @@ def processDB(change, pathFile):
 				description = f['description']
 				metrics_value = '|'.join(s for s in f['metrics'])
 				sources = '|'.join(s for s in f['sources'])
-				values = (entity, version, id_validation, field, description, metrics_value, sources, query, jiraID)
+				values = (entity, version, id_validation, field, description, metrics_value, sources, query, idJira)
 		print("***Insert new validation into table")
-		sql = "INSERT INTO test_thor4p (entity,version,id,field,description,metrics_value,sources,query,jiraID) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+		sql = "INSERT INTO test_thor4p (entity,version,id,field,description,metrics_value,sources,query,idJira) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 		DBConnection(sql, values)
 	elif change == "D":
 		print("***Delete a validation into table")
-		sql = "DELETE FROM test_thor4p WHERE jiraID) values (%s)"
-		DBConnection(sql,jiraID)
+		sql = "DELETE FROM test_thor4p WHERE idJira) values (%s)"
+		DBConnection(sql,idJira)
 	elif change == "M":
 		print("**Modificate a validation")
 		with open(pathFile, 'r') as file:
