@@ -1,0 +1,9 @@
+- dataset_id: Mobile_Line
+  dataset_version: 5
+  description: Number of different BILLING_ACCOUNT_ID
+  field: B5_BILLING_ACCOUNT_ID
+  id: Fixed_Line!4!BILLING_ACCOUNT_ID-DISTINCT
+  metrics:
+  - result
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.BILLING_ACCOUNT_ID) as result FROM validation_data_table t1
