@@ -28,8 +28,8 @@ jobs:
 
 
       - name: Run script
-        run: python3 $GITHUB_WORKSPACE/validaciones_thor/.github/workflows/test_python.py $GITHUB_WORKSPACE/test_validations
-        #run: python3 $GITHUB_WORKSPACE/.github/workflows/test_python.py $GITHUB_WORKSPACE
+        run: python3 $GITHUB_WORKSPACE/validaciones_thor/.github/workflows/gitAction.py $GITHUB_WORKSPACE/test_validations
+        #run: python3 $GITHUB_WORKSPACE/.github/workflows/gitAction.py $GITHUB_WORKSPACE
         env:
           DB_USER_NAME : ${{secrets.DB_USER_NAME}}
           DB_PASSWORD : ${{secrets.DB_PASSWORD}}
