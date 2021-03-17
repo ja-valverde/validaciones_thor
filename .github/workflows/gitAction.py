@@ -69,7 +69,7 @@ def getChange(path):
 	repo = git.Repo(path)
 	#list branches
 	print("list branches")
-	for h in repo.heads
+	for h in repo.heads:
 		print ("branch-> " + h)
 	#commit = repo.git.diff('HEAD~1..HEAD', name_status=True)
 	commit = repo.git.diff('HEAD~1..main', name_status=True)
