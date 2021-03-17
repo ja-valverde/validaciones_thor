@@ -67,8 +67,12 @@ def processDB(change, pathFile, fileChanged):
 def getChange(path):
 	print("***PATH: "+ path)
 	repo = git.Repo(path)
-	#hcommit = repo.head.commit
-	commit = repo.git.diff('HEAD~1..HEAD', name_status=True)
+	#list branches
+	print("list branches")
+	for h in repo.heads
+		print ("branch-> " + h)
+	#commit = repo.git.diff('HEAD~1..HEAD', name_status=True)
+	commit = repo.git.diff('HEAD~1..main', name_status=True)
 	type = commit.split("\t")[0]
 	fileChanged = commit.split("\t")[1]
 	pathFile = path + "/" + fileChanged
