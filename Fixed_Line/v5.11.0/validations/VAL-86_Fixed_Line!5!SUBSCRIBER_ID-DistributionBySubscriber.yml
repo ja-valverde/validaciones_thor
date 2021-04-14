@@ -1,0 +1,9 @@
+dataset_id: Fixed_Line
+dataset_version: 5
+description: Number rows by subscriber
+field: SUBSCRIBER_ID
+id: Fixed_Line!5!SUBSCRIBER_ID-DistributionBySubscriber
+metrics:
+- distribution
+sources: []
+sql: select subscriber from Fixed_LIne group by op
