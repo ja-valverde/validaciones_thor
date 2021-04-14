@@ -1,0 +1,12 @@
+dataset_id: Mobile_Line
+dataset_version: 3
+description: Count nulls by Operator ID
+field: Operator_ID
+id: Mobile_Line!3!Operator_ID-CountNulls
+metrics:
+- result
+sources:
+- dataset_id: D_Service
+  dataset_version: 3
+  name: D_Service
+sql: Select count(*) from Mobile_Line where op is null
