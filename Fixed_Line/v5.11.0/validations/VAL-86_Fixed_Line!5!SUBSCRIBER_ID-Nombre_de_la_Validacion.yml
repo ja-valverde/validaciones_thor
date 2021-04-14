@@ -1,1 +1,9 @@
-[]
+dataset_id: Fixed_Line
+dataset_version: 5
+description: None
+field: SUBSCRIBER_ID
+id: Fixed_Line!5!SUBSCRIBER_ID-Nombre_de_la_Validacion
+metrics:
+- None
+sources: []
+sql: None
