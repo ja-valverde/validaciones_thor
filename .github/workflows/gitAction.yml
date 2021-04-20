@@ -7,6 +7,9 @@ on:
     types: [closed]
     branches:
       - main
+      - 'validation_thor_*'      
+    #paths:
+    #  - '**/validations/**'
 jobs:
   first-job:
     name: GithubAction python2 test
