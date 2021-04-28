@@ -1,0 +1,16 @@
+dataset_id: Fixed_Line
+dataset_version: 3
+description: Number rows by subscriber
+field: Operator
+id: Fixed_Line!3!Operator-DistributionByOperator
+id_jira: VAL-86
+metrics:
+- distribution
+sources:
+- dataset_id: D_Fixed
+  dataset_version: 1
+  name: D_Fixed
+- dataset_id: D_Line
+  dataset_version: 3
+  name: D_Line
+sql: select subscriber from Fixed_LIne group by op
