@@ -1,0 +1,14 @@
+dataset_id: Mobile_Handset_Sale_Daily
+dataset_version: 4
+description: Number of rows that Mobile_Handset_Sale_Daily not crossed with Mobile_Handset_Stock
+  by CHANNEL_ID fields
+field: CHANNEL_ID
+id: CHANNEL_ID-crossByChannelID
+id_jira: val-109
+metrics:
+- result
+product: DR
+sources: []
+sql: SELECT COUNT(*) as result FROM (SELECT DISTINCT CHANNEL_ID from validation_data_table)
+  P LEFT JOIN Mobile_Handset_Stock S ON P.CHANNEL_ID = S.CHANNEL_ID WHERE S.CHANNEL_ID
+  IS NULL AND P.CHANNEL_ID IS NOT NULL
