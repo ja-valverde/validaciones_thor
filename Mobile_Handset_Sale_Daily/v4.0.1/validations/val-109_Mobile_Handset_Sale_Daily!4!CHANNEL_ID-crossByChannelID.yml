@@ -1,0 +1,12 @@
+dataset_id: Mobile_Handset_Sale_Daily
+dataset_version: 4
+description: Number of rows that Mobile_Handset_Sale_Daily not crossed with Mobile_Handset_Stock
+  by CHANNEL_ID fields
+field: CHANNEL_ID
+id: CHANNEL_ID-crossByChannelID
+id_jira: val-109
+metrics:
+- result
+product: DR
+sources: []
+sql: None
