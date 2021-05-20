@@ -1,33 +1,34 @@
 # your-repo-name/.github/workflows/first_workflow.yml
-name: Launch git action
+#name: Launch git action
 # se ejecuta cuando se mergea
-on:
+
+#on:
   #push
   #pull_request:
-    types: [closed]
-    branches:
-      - main
-      - 'validation_thor_*'      
-jobs:
-  first-job:
-    name: GithubAction python2 test
-    runs-on: [self-hosted, Linux, X64,  ConnectionGoogle, dockerValidaciones]
-    steps:
-      - name: Check directory
-        run: |
-          rm -rf $GITHUB_WORKSPACE/validaciones_thor
-          git checkout
-          git clone https://ja-valverde:ffecd97b05caeb491e35fe99986260e5e90582b5@github.com/ja-valverde/validaciones_thor.git
-          echo $GITHUB_WORKSPACE
-          ls -R $GITHUB_WORKSPACE/validaciones_thor
-          ls -la $GITHUB_WORKSPACE/validaciones_thor
+    #types: [closed]
+    #branches:
+      #- main
+      #- 'validation_thor_*'      
+#jobs:
+  #first-job:
+    #name: GithubAction python2 test
+    #runs-on: [self-hosted, Linux, X64,  ConnectionGoogle, dockerValidaciones]
+    #steps:
+      #- name: Check directory
+        #run: |
+          #rm -rf $GITHUB_WORKSPACE/validaciones_thor
+          #git checkout
+          #git clone https://ja-valverde:ffecd97b05caeb491e35fe99986260e5e90582b5@github.com/ja-valverde/validaciones_thor.git
+          #echo $GITHUB_WORKSPACE
+          #ls -R $GITHUB_WORKSPACE/validaciones_thor
+          #ls -la $GITHUB_WORKSPACE/validaciones_thor
 
 
-      - name: Run script
-        #run when clone repository:
-        run: python3 $GITHUB_WORKSPACE/validaciones_thor/.github/workflows/gitAction.py $GITHUB_WORKSPACE/validaciones_thor
-        # run when checkout:
+      #- name: Run script
+        ##run when clone repository:
+        #run: python3 $GITHUB_WORKSPACE/validaciones_thor/.github/workflows/gitAction.py $GITHUB_WORKSPACE/validaciones_thor
+        ## run when checkout:
         #run: python3 $GITHUB_WORKSPACE/.github/workflows/gitAction.py $GITHUB_WORKSPACE
-        env:
-          DB_USER_NAME : ${{secrets.DB_USER_NAME}}
-          DB_PASSWORD : ${{secrets.DB_PASSWORD}}
+        #env:
+          #DB_USER_NAME : ${{secrets.DB_USER_NAME}}
+          #DB_PASSWORD : ${{secrets.DB_PASSWORD}}
