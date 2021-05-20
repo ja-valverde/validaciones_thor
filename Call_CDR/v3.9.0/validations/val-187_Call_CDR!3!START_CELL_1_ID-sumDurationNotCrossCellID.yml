@@ -1,0 +1,16 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Sum of SESSION_DURATION when Cell_ID not cross
+field: START_CELL_1_ID
+id: START_CELL_1_ID-sumDurationNotCrossCellID
+id_jira: val-187
+metrics:
+- result
+product: Neptuno
+sources:
+- dataset_id: Cells_Catalogue
+  dataset_version: 5
+  name: Cells_Catalogue
+sql: SELECT SUM(A.SESSION_DURATION_QT) AS result FROM validation_data_table A LEFT
+  JOIN cells_catalogue B ON A.START_CELL_1_ID = B.CELL_ID WHERE B.CELL_ID IS NULL
+  AND A.START_CELL_1_ID IS NOT NULL

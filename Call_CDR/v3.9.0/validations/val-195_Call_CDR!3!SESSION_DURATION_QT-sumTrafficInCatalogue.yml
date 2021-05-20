@@ -1,0 +1,16 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Traffic in cells that are on catalogue
+field: SESSION_DURATION_QT
+id: SESSION_DURATION_QT-sumTrafficInCatalogue
+id_jira: val-195
+metrics:
+- result
+product: Neptuno
+sources:
+- dataset_id: Cells_Catalogue
+  dataset_version: 5
+  name: Cells_Catalogue
+sql: SELECT CAST(SUM(NVL(SESSION_DURATION_QT,0)) AS DECIMAL (30,5)) AS SESSION_DURATION_QT
+  FROM (SELECT * FROM validation_data_table t1 INNER JOIN (SELECT DISTINCT((CELL_ID))
+  as CELL_ID FROM Cells_Catalogue WHERE CELL_ID is not null) t2 ON t2.CELL_ID=t1.START_CELL_1_ID)

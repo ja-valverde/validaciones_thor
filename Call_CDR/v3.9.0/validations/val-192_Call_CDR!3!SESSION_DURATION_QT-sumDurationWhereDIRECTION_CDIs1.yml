@@ -1,0 +1,13 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Sum all the values for the column SESSION_DURATION_QT where DIRECTION_CD=1
+  and ROAMING_IND = 0
+field: SESSION_DURATION_QT
+id: SESSION_DURATION_QT-sumDurationWhereDIRECTION_CDIs1
+id_jira: val-192
+metrics:
+- result
+product: Neptuno
+sources: []
+sql: Select cast(sum(SESSION_DURATION_QT) as DECIMAL(30,5)) as result from validation_data_table
+  where direction_cd=1 and ROAMING_IND = 0
