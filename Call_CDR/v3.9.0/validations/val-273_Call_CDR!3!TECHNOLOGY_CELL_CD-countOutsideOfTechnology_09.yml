@@ -1,0 +1,11 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Events where TERMINAL_TECHNOLOGY < CELL_TECHNOLOGY can't be analyzed
+field: TECHNOLOGY_CELL_CD
+id: TECHNOLOGY_CELL_CD-countOutsideOfTechnology_09
+id_jira: val-273
+metrics:
+- result
+product: Neptuno
+sources: []
+sql: select count(*) as result from validation_data_table

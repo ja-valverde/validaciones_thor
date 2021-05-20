@@ -1,0 +1,19 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Percentage of users and traffic (minutes) of Call_CDR by not Telefonica
+  users
+field: USER_1_ID
+id: USER_1_ID-Not_Clients_Call_CDR_Mobile_Revenue_Monthly
+id_jira: val-241
+metrics:
+- distribution
+product: Neptuno, Canal 2.0, iScore
+sources:
+- dataset_id: Mobile_Revenue_Monthly
+  dataset_version: 3
+  name: Mobile_Revenue_Monthly
+sql: select to_json(collect_list((pct_no_tef, pct_mins_no_tef))) as distribution from
+  (select round((sum(if (msisdn_id is null, 1, 0)) * 100) / count(*), 2) as pct_no_tef,
+  round((sum(if (msisdn_id is null, session_duration_qt, 0)) * 100) / sum (session_duration_qt),
+  2) as pct_mins_no_tef from validation_data_table left outer join Mobile_Revenue_Monthly
+  on phone_1_id=msisdn_id)

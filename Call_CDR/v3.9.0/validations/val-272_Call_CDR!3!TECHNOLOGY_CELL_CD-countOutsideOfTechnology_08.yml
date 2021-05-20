@@ -1,0 +1,16 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Count of rows in IMEI_TAC that has at least one IMEI_ID with several
+  TAC_ID
+field: TECHNOLOGY_CELL_CD
+id: TECHNOLOGY_CELL_CD-countOutsideOfTechnology_08
+id_jira: val-272
+metrics:
+- result
+product: Neptuno
+sources:
+- dataset_id: IMEI_TAC
+  dataset_version: 3
+  name: IMEI_TAC
+sql: select (count(distinct IMEI_ID, TAC_ID) - count(distinct IMEI_ID)) as result
+  from IMEI_TAC
