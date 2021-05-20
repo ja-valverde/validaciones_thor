@@ -1,0 +1,17 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Cells per LOCAL_TECHNOLOGY_CELL_DES
+field: TECHNOLOGY_CELL_CD
+id: TECHNOLOGY_CELL_CD-CELLS_PER_LOCAL_TECHNOLOGY_CELL_DES
+id_jira: val-304
+metrics:
+- distribution
+product: SmartSteps, Neptuno
+sources:
+- dataset_id: D_Technology_Cell
+  dataset_version: 3
+  name: D_Technology_Cell
+sql: SELECT to_json(collect_list((LOCAL_TECHNOLOGY_CELL_DES, total))) AS distribution
+  FROM (SELECT LOCAL_TECHNOLOGY_CELL_DES,COUNT(*) AS total FROM (SELECT * FROM validation_data_table
+  t1 LEFT OUTER JOIN D_Technology_Cell t2 ON t1.TECHNOLOGY_CELL_CD=t2.LOCAL_TECHNOLOGY_CELL_CD)
+  GROUP BY LOCAL_TECHNOLOGY_CELL_DES)

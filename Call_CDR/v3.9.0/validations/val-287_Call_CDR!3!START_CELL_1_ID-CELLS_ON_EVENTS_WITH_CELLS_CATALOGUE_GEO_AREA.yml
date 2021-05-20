@@ -1,0 +1,111 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Count of cells in Call_CDR with cells in catalogue per second level Geo
+  Area
+field: START_CELL_1_ID
+id: START_CELL_1_ID-CELLS_ON_EVENTS_WITH_CELLS_CATALOGUE_GEO_AREA
+id_jira: val-287
+metrics:
+- distribution
+product: SmartSteps
+sources:
+- dataset_id: D_Geographical_Area
+  dataset_version: 3
+  name: D_Geographical_Area
+- dataset_id: D_Geographical_Area_Rel
+  dataset_version: 3
+  name: D_Geographical_Area_Rel
+- dataset_id: Cells_Catalogue
+  dataset_version: 5
+  name: Cells_Catalogue
+sql: SELECT to_json(collect_list((GROUPED_GEO_AREA_ID, GROUPED_GEO_AREA_NAME, result)))
+  AS distribution FROM (SELECT GROUPED_GEO_AREA_ID, GROUPED_GEO_AREA_NAME, COUNT(*)
+  as result FROM (SELECT (*) FROM (SELECT DISTINCT START_CELL_1_ID AS MAIN_ID from
+  validation_data_table where START_CELL_1_ID IS NOT NULL) P INNER JOIN (SELECT DISTINCT
+  CELL_ID AS REFERENCE_ID FROM Cells_Catalogue WHERE CELL_ID IS NOT NULL) S ON P.MAIN_ID
+  = S.REFERENCE_ID) P LEFT OUTER JOIN (SELECT C.CELL_ID as CELL_ID, L.CHILD_GEO_AREA_ID
+  as CHILD_GEO_AREA_ID, L.GROUPED_GEO_AREA_ID as GROUPED_GEO_AREA_ID, G.GEO_AREA_NAME
+  as GROUPED_GEO_AREA_NAME FROM Cells_Catalogue C LEFT OUTER JOIN (select CHILD_GEO_AREA_ID,
+  (case when (select count(l8) from (Select rh1.CHILD_GEO_AREA_ID AS CHILD_GEO_AREA_ID,
+  rh1.PARENT_GEO_AREA_ID  as l1, rh2.PARENT_GEO_AREA_ID as l2, rh3.PARENT_GEO_AREA_ID
+  as l3, rh4.PARENT_GEO_AREA_ID as l4, rh5.PARENT_GEO_AREA_ID as l5, rh6.PARENT_GEO_AREA_ID
+  as l6, rh7.PARENT_GEO_AREA_ID as l7, rh8.PARENT_GEO_AREA_ID as l8 from D_Geographical_Area_Rel
+  rh1 left outer join D_Geographical_Area_Rel rh2 on rh1.PARENT_GEO_AREA_ID = rh2.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh3 on rh2.PARENT_GEO_AREA_ID = rh3.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh4 on rh3.PARENT_GEO_AREA_ID = rh4.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh5 on rh4.PARENT_GEO_AREA_ID = rh5.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh6 on rh5.PARENT_GEO_AREA_ID = rh6.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh7 on rh6.PARENT_GEO_AREA_ID = rh7.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh8 on rh7.PARENT_GEO_AREA_ID = rh8.CHILD_GEO_AREA_ID))
+  <> 0 then coalesce(l7, l6, l5, l4, l3, l2, l1) when (select count(l7) from (Select
+  rh1.CHILD_GEO_AREA_ID AS CHILD_GEO_AREA_ID, rh1.PARENT_GEO_AREA_ID  as l1, rh2.PARENT_GEO_AREA_ID
+  as l2, rh3.PARENT_GEO_AREA_ID as l3, rh4.PARENT_GEO_AREA_ID as l4, rh5.PARENT_GEO_AREA_ID
+  as l5, rh6.PARENT_GEO_AREA_ID as l6, rh7.PARENT_GEO_AREA_ID as l7, rh8.PARENT_GEO_AREA_ID
+  as l8 from D_Geographical_Area_Rel rh1 left outer join D_Geographical_Area_Rel rh2
+  on rh1.PARENT_GEO_AREA_ID = rh2.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh3 on rh2.PARENT_GEO_AREA_ID = rh3.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh4 on rh3.PARENT_GEO_AREA_ID = rh4.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh5 on rh4.PARENT_GEO_AREA_ID = rh5.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh6 on rh5.PARENT_GEO_AREA_ID = rh6.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh7 on rh6.PARENT_GEO_AREA_ID = rh7.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh8 on rh7.PARENT_GEO_AREA_ID = rh8.CHILD_GEO_AREA_ID)) <> 0 then coalesce(l6, l5,
+  l4, l3, l2, l1) when (select count(l6) <> 0 from (Select rh1.CHILD_GEO_AREA_ID AS
+  CHILD_GEO_AREA_ID, rh1.PARENT_GEO_AREA_ID  as l1, rh2.PARENT_GEO_AREA_ID as l2,
+  rh3.PARENT_GEO_AREA_ID as l3, rh4.PARENT_GEO_AREA_ID as l4, rh5.PARENT_GEO_AREA_ID
+  as l5, rh6.PARENT_GEO_AREA_ID as l6, rh7.PARENT_GEO_AREA_ID as l7, rh8.PARENT_GEO_AREA_ID
+  as l8 from D_Geographical_Area_Rel rh1 left outer join D_Geographical_Area_Rel rh2
+  on rh1.PARENT_GEO_AREA_ID = rh2.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh3 on rh2.PARENT_GEO_AREA_ID = rh3.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh4 on rh3.PARENT_GEO_AREA_ID = rh4.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh5 on rh4.PARENT_GEO_AREA_ID = rh5.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh6 on rh5.PARENT_GEO_AREA_ID = rh6.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh7 on rh6.PARENT_GEO_AREA_ID = rh7.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh8 on rh7.PARENT_GEO_AREA_ID = rh8.CHILD_GEO_AREA_ID)) then coalesce(l5, l4, l3,
+  l2, l1) when (select count(l5) <> 0 from (Select rh1.CHILD_GEO_AREA_ID AS CHILD_GEO_AREA_ID,
+  rh1.PARENT_GEO_AREA_ID  as l1, rh2.PARENT_GEO_AREA_ID as l2, rh3.PARENT_GEO_AREA_ID
+  as l3, rh4.PARENT_GEO_AREA_ID as l4, rh5.PARENT_GEO_AREA_ID as l5, rh6.PARENT_GEO_AREA_ID
+  as l6, rh7.PARENT_GEO_AREA_ID as l7, rh8.PARENT_GEO_AREA_ID as l8 from D_Geographical_Area_Rel
+  rh1 left outer join D_Geographical_Area_Rel rh2 on rh1.PARENT_GEO_AREA_ID = rh2.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh3 on rh2.PARENT_GEO_AREA_ID = rh3.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh4 on rh3.PARENT_GEO_AREA_ID = rh4.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh5 on rh4.PARENT_GEO_AREA_ID = rh5.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh6 on rh5.PARENT_GEO_AREA_ID = rh6.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh7 on rh6.PARENT_GEO_AREA_ID = rh7.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh8 on rh7.PARENT_GEO_AREA_ID = rh8.CHILD_GEO_AREA_ID))
+  then coalesce(l4, l3, l2, l1) when (select count(l4) <> 0 from (Select rh1.CHILD_GEO_AREA_ID
+  AS CHILD_GEO_AREA_ID, rh1.PARENT_GEO_AREA_ID  as l1, rh2.PARENT_GEO_AREA_ID as l2,
+  rh3.PARENT_GEO_AREA_ID as l3, rh4.PARENT_GEO_AREA_ID as l4, rh5.PARENT_GEO_AREA_ID
+  as l5, rh6.PARENT_GEO_AREA_ID as l6, rh7.PARENT_GEO_AREA_ID as l7, rh8.PARENT_GEO_AREA_ID
+  as l8 from D_Geographical_Area_Rel rh1 left outer join D_Geographical_Area_Rel rh2
+  on rh1.PARENT_GEO_AREA_ID = rh2.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh3 on rh2.PARENT_GEO_AREA_ID = rh3.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh4 on rh3.PARENT_GEO_AREA_ID = rh4.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh5 on rh4.PARENT_GEO_AREA_ID = rh5.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh6 on rh5.PARENT_GEO_AREA_ID = rh6.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh7 on rh6.PARENT_GEO_AREA_ID = rh7.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh8 on rh7.PARENT_GEO_AREA_ID = rh8.CHILD_GEO_AREA_ID)) then coalesce(l3, l2, l1)
+  when (select count(l3) from (Select rh1.CHILD_GEO_AREA_ID AS CHILD_GEO_AREA_ID,
+  rh1.PARENT_GEO_AREA_ID  as l1, rh2.PARENT_GEO_AREA_ID as l2, rh3.PARENT_GEO_AREA_ID
+  as l3, rh4.PARENT_GEO_AREA_ID as l4, rh5.PARENT_GEO_AREA_ID as l5, rh6.PARENT_GEO_AREA_ID
+  as l6, rh7.PARENT_GEO_AREA_ID as l7, rh8.PARENT_GEO_AREA_ID as l8 from D_Geographical_Area_Rel
+  rh1 left outer join D_Geographical_Area_Rel rh2 on rh1.PARENT_GEO_AREA_ID = rh2.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh3 on rh2.PARENT_GEO_AREA_ID = rh3.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh4 on rh3.PARENT_GEO_AREA_ID = rh4.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh5 on rh4.PARENT_GEO_AREA_ID = rh5.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh6 on rh5.PARENT_GEO_AREA_ID = rh6.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh7 on rh6.PARENT_GEO_AREA_ID = rh7.CHILD_GEO_AREA_ID
+  left outer join D_Geographical_Area_Rel rh8 on rh7.PARENT_GEO_AREA_ID = rh8.CHILD_GEO_AREA_ID))
+  <> 0 then coalesce(l2, l1) else l1 end) AS GROUPED_GEO_AREA_ID from ((Select rh1.CHILD_GEO_AREA_ID
+  AS CHILD_GEO_AREA_ID, rh1.PARENT_GEO_AREA_ID  as l1, rh2.PARENT_GEO_AREA_ID as l2,
+  rh3.PARENT_GEO_AREA_ID as l3, rh4.PARENT_GEO_AREA_ID as l4, rh5.PARENT_GEO_AREA_ID
+  as l5, rh6.PARENT_GEO_AREA_ID as l6, rh7.PARENT_GEO_AREA_ID as l7, rh8.PARENT_GEO_AREA_ID
+  as l8 from D_Geographical_Area_Rel rh1 left outer join D_Geographical_Area_Rel rh2
+  on rh1.PARENT_GEO_AREA_ID = rh2.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh3 on rh2.PARENT_GEO_AREA_ID = rh3.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh4 on rh3.PARENT_GEO_AREA_ID = rh4.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh5 on rh4.PARENT_GEO_AREA_ID = rh5.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh6 on rh5.PARENT_GEO_AREA_ID = rh6.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh7 on rh6.PARENT_GEO_AREA_ID = rh7.CHILD_GEO_AREA_ID left outer join D_Geographical_Area_Rel
+  rh8 on rh7.PARENT_GEO_AREA_ID = rh8.CHILD_GEO_AREA_ID))) L ON C.GEO_AREA_ID = L.CHILD_GEO_AREA_ID
+  LEFT OUTER JOIN D_Geographical_Area G ON L.GROUPED_GEO_AREA_ID = G.GEO_AREA_ID)
+  S ON P.MAIN_ID = S.CELL_ID GROUP BY GROUPED_GEO_AREA_ID, GROUPED_GEO_AREA_NAME)

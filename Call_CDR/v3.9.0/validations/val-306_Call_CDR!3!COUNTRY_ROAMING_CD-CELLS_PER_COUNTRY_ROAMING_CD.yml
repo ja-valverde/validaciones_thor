@@ -1,0 +1,13 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Cells per COUNTRY_ROAMING_CD
+field: COUNTRY_ROAMING_CD
+id: COUNTRY_ROAMING_CD-CELLS_PER_COUNTRY_ROAMING_CD
+id_jira: val-306
+metrics:
+- distribution
+product: Neptuno
+sources: []
+sql: SELECT to_json(collect_list((COUNTRY_ROAMING_CD,result))) AS distribution FROM
+  (SELECT COUNTRY_ROAMING_CD, COUNT(DISTINCT(START_CELL_1_ID)) as result FROM validation_data_table
+  GROUP BY COUNTRY_ROAMING_CD)

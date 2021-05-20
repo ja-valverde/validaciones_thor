@@ -1,0 +1,17 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Count of cells without events on  Call_CDR
+field: START_CELL_1_ID
+id: START_CELL_1_ID-COUNT_CELLS_WITHOUT_EVENT
+id_jira: val-291
+metrics:
+- result
+product: Neptuno
+sources:
+- dataset_id: Cells_Catalogue
+  dataset_version: 5
+  name: Cells_Catalogue
+sql: SELECT COUNT(*) as TOTAL FROM (SELECT DISTINCT((CELL_ID)) as MAIN_ID FROM Cells_Catalogue
+  WHERE CELL_ID is not null) t1 LEFT OUTER JOIN (SELECT DISTINCT((START_CELL_1_ID))
+  as REFERENCE_ID FROM validation_data_table) t2 ON t2.REFERENCE_ID=t1.MAIN_ID WHERE
+  t2.REFERENCE_ID is null
