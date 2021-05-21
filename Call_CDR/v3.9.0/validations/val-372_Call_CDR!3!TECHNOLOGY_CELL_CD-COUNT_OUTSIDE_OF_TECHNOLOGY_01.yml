@@ -1,0 +1,18 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Events lost in Call_CDR - D_TACS
+field: TECHNOLOGY_CELL_CD
+id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_01
+id_jira: val-372
+metrics:
+- result
+product: Neptuno
+sources:
+- dataset_id: IMEI_TAC
+  dataset_version: 3
+  name: IMEI_TAC
+sql: select (SELECT count(*) as val1 from validation_data_table) - (SELECT count(*)
+  as val2 from (select IMEI_1_ID, TAC_ID, OPERATOR_ID, START_CELL_1_ID, SESSION_DURATION_QT,
+  EVENT_TM from validation_data_table left join (select distinct IMEI_ID, TAC_ID from
+  IMEI_TAC) on IMEI_1_ID=IMEI_ID where IMEI_1_ID is not null and TAC_ID is not null
+  and START_CELL_1_ID is not null)) as result

@@ -1,0 +1,13 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Count number of events with duplicated timestamp for the same user
+field: USER_1_ID
+id: USER_1_ID-COUNT_EVENTS_DUPLICATED_TIMESTAMP
+id_jira: val-282
+metrics:
+- result
+product: SmartSteps, Neptuno
+sources: []
+sql: SELECT SUM(COUNT) AS RESULT FROM (SELECT EVENT_TM, USER_1_ID, COUNT(EVENT_TM)
+  AS COUNT FROM validation_data_table GROUP BY EVENT_TM, USER_1_ID) WHERE COUNT >
+  1

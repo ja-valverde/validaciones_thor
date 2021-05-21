@@ -1,0 +1,12 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: Cells per ROAMING_IND
+field: ROAMING_IND
+id: ROAMING_IND-CELLS_PER_ROAMING_IND
+id_jira: val-303
+metrics:
+- distribution
+product: Neptuno
+sources: []
+sql: SELECT to_json(collect_list((ROAMING_IND, result))) AS distribution FROM (select
+  ROAMING_IND, count(*) as result from validation_data_table group by ROAMING_IND)

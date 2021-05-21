@@ -1,0 +1,12 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: field PHONE_1_ID in entity Call_CDR contains prefix or not
+field: PHONE_1_ID
+id: PHONE_1_ID-VALIDATE_NOT_PHONE_PREFIX_IN_NATIONAL_CALLS
+id_jira: val-281
+metrics:
+- result
+product: AURA
+sources: []
+sql: Select count(*) as result from validation_data_table where ROAMING_IND != 0 and
+  (phone_1_id like '+%' or phone_1_id like '00%' or length(phone_1_id) > 9)
