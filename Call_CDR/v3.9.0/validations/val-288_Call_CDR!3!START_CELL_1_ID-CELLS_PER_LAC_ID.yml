@@ -14,4 +14,4 @@ sources:
 sql: SELECT to_json(collect_list((LAC_ID, RESULT))) AS distribution FROM (SELECT LAC_ID,COUNT(*)
   AS RESULT FROM (SELECT * FROM validation_data_table t1 LEFT OUTER JOIN Cells_Catalogue
   t2 ON t1.START_CELL_1_ID=t2.CELL_ID) GROUP BY LAC_ID)
-type: ERROR
+type: '0'
