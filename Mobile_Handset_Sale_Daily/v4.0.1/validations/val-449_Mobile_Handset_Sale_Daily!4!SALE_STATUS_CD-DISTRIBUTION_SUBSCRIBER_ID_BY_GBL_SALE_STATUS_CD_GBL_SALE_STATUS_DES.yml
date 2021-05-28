@@ -1,0 +1,18 @@
+dataset_id: Mobile_Handset_Sale_Daily
+dataset_version: 4
+description: distribution of distintct subscriber_id by gbl_sale_status_cd and gbl_sale_status_des
+field: SALE_STATUS_CD
+id: SALE_STATUS_CD-DISTRIBUTION_SUBSCRIBER_ID_BY_GBL_SALE_STATUS_CD_GBL_SALE_STATUS_DES
+id_jira: val-449
+metrics:
+- distribution
+product: CBD
+sources:
+- dataset_id: D_Devices_Sale_Status
+  dataset_version: 4
+  name: D_Devices_Sale_Status
+sql: SELECT to_json(collect_list((GBL_SALE_STATUS_CD,SALE_STATUS_DES,RESULT))) as
+  distribution FROM (select GBL_SALE_STATUS_CD, SALE_STATUS_DES, count(distinct subscriber_id)
+  as result from validation_data_table join D_Devices_Sale_Status on validation_data_table.sale_status_cd
+  = D_Devices_Sale_Status.sale_status_cd group by GBL_SALE_STATUS_CD, SALE_STATUS_DES)
+type: info
