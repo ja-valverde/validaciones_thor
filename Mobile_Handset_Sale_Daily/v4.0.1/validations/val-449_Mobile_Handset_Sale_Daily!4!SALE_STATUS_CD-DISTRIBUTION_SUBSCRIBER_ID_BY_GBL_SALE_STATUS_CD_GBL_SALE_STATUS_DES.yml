@@ -5,7 +5,7 @@ field: SALE_STATUS_CD
 id: SALE_STATUS_CD-DISTRIBUTION_SUBSCRIBER_ID_BY_GBL_SALE_STATUS_CD_GBL_SALE_STATUS_DES
 id_jira: val-449
 metrics:
-- distribution
+- distributionnnn
 product: CBD
 sources:
 - dataset_id: D_Devices_Sale_Status
