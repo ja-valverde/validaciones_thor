@@ -1,0 +1,15 @@
+dataset_id: Mobile_Handset_Sale_Daily
+dataset_version: 4
+description: number of pk (sale_tm, sale_status_cd, subscriber_id, imei_id, month_dt)
+  duplicated
+field: SUBSCRIBER_ID
+id: SUBSCRIBER_ID-COUNT_DUPLICATES_BY_SALE_TM_SALE_STATUS_CD_ SUBSCRIBER_ID_IMEI_ID_MONTH_DT
+id_jira: val-447
+metrics:
+- result
+product: CBD
+sources: []
+sql: SELECT** select count(1) as result from (Select SALE_TM, SALE_STATUS_CD, SUBSCRIBER_ID,
+  IMEI_ID, MONTH_DT, count(1) FROM validation_data_table GROUP BY SALE_TM, SALE_STATUS_CD,
+  SUBSCRIBER_ID, IMEI_ID, MONTH_DT HAVING COUNT(1) > 1)
+type: info
