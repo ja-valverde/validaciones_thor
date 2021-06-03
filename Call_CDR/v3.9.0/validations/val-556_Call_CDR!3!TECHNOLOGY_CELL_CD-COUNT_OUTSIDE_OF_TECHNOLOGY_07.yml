@@ -1,0 +1,38 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: sum(session_duration) where terminal_technology < cell_technology
+field: TECHNOLOGY_CELL_CD
+id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_07
+id_jira: val-556
+metrics:
+- result
+product: Neptuno
+sources:
+- dataset_id: Cells_Catalogue
+  dataset_version: 5
+  name: Cells_Catalogue
+- dataset_id: D_Technology_Cell
+  dataset_version: 3
+  name: D_Technology_Cell
+- dataset_id: IMEI_TAC
+  dataset_version: 3
+  name: IMEI_TAC
+- dataset_id: D_TACS
+  dataset_version: 4
+  name: D_TACS
+sql: select sum(SESSION_DURATION_QT) as result from (select START_CELL_1_ID, SESSION_DURATION_QT,
+  TECHNOLOGY_TYPE, GBL_TECHNOLOGY_CELL_CD from (select CELL_ID, GBL_TECHNOLOGY_CELL_CD,
+  TECHNOLOGY_CELL_CD from Cells_Catalogue left outer join D_Technology_Cell on Cells_Catalogue.OPERATOR_ID
+  = D_Technology_Cell.OPERATOR_ID and TECHNOLOGY_CELL_CD=LOCAL_TECHNOLOGY_CELL_CD
+  where Cells_Catalogue.CELL_ID is not null and GBL_TECHNOLOGY_CELL_CD is not null
+  and CELL_ID is not null) as Cells_Catagoue_filter join (select IMEI_1_ID, imeiFilter_1.OPERATOR_ID,
+  TECHNOLOGY_4G_OB_IND, TECHNOLOGY_3G_CD, START_CELL_1_ID, SESSION_DURATION_QT, case
+  when TECHNOLOGY_4G_OB_IND != 'No LTE' then '4G' when TECHNOLOGY_3G_CD != 'No' then
+  '3G' else '2G' end as TECHNOLOGY_TYPE from (select IMEI_1_ID, TAC_ID, OPERATOR_ID,
+  START_CELL_1_ID, SESSION_DURATION_QT, EVENT_TM from validation_data_table left join
+  (select distinct IMEI_ID, TAC_ID from IMEI_TAC) as imeiFilter on IMEI_1_ID=IMEI_ID
+  where IMEI_1_ID is not null and TAC_ID is not null and START_CELL_1_ID is not null)
+  as imeiFilter_1 left outer join D_TACS on imeiFilter_1.TAC_ID = D_TACS.TAC_ID where
+  TECHNOLOGY_4G_OB_IND is not null and TECHNOLOGY_3G_CD is not null) as d_tac_filter
+  on CELL_ID = START_CELL_1_ID where TECHNOLOGY_TYPE < GBL_TECHNOLOGY_CELL_CD)
+type: info

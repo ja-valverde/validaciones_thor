@@ -1,0 +1,14 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: count events by user percent<0.25
+field: USER_1_ID
+id: USER_1_ID-PERCENTILE_EVENTS_BY_USER(>=0.25)
+id_jira: val-461
+metrics:
+- result
+product: SmartSteps
+sources: []
+sql: SELECT SUM (VALUE) as result FROM (SELECT USER_1_ID, COUNT(*) as VALUE FROM validation_data_table
+  GROUP BY USER_1_ID) WHERE VALUE >= (SELECT APPROX_PERCENTILE(VALUE, 0.25) AS PERCENT
+  FROM (SELECT USER_1_ID, COUNT(*) as VALUE FROM validation_data_table GROUP BY USER_1_ID))
+type: info

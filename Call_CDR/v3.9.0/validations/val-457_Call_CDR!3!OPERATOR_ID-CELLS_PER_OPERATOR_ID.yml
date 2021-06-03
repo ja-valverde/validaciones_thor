@@ -1,0 +1,13 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: cells per operator_id
+field: OPERATOR_ID
+id: OPERATOR_ID-CELLS_PER_OPERATOR_ID
+id_jira: val-457
+metrics:
+- distribution
+product: Neptuno
+sources: []
+sql: SELECT to_json(collect_list((OPERATOR_ID, result))) AS distribution FROM (select
+  OPERATOR_ID, count(*) as result from validation_data_table group by OPERATOR_ID)
+type: info
