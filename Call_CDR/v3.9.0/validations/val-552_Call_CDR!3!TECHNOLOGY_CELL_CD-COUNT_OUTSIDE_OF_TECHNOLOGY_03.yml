@@ -1,0 +1,22 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: events lost in cells_catalogue - d_technology_cell
+field: TECHNOLOGY_CELL_CD
+id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_03
+id_jira: val-552
+metrics:
+- result
+product: Neptuno
+sources:
+- dataset_id: Cells_Catalogue
+  dataset_version: 5
+  name: Cells_Catalogue
+- dataset_id: D_Technology_Cell
+  dataset_version: 3
+  name: D_Technology_Cell
+sql: select (SELECT count(*) as val1 from Cells_Catalogue) - (SELECT count(*) as val2
+  from (select CELL_ID, GBL_TECHNOLOGY_CELL_CD, TECHNOLOGY_CELL_CD from Cells_Catalogue
+  left outer join D_Technology_Cell on Cells_Catalogue.OPERATOR_ID = D_Technology_Cell.OPERATOR_ID
+  and TECHNOLOGY_CELL_CD=LOCAL_TECHNOLOGY_CELL_CD where Cells_Catalogue.CELL_ID is
+  not null and GBL_TECHNOLOGY_CELL_CD is not null and CELL_ID is not null)) as result
+type: info

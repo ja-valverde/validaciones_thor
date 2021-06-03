@@ -1,0 +1,13 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: count number of phone_id with more than 24 hours of traffic
+field: PHONE_1_ID
+id: PHONE_1_ID-COUNT_PHONE_ID_WITH_MORE_24H_TRAFFIC
+id_jira: val-458
+metrics:
+- result
+product: Neptuno
+sources: []
+sql: SELECT COUNT(*) AS RESULT FROM (SELECT PHONE_1_ID, SUM(SESSION_DURATION_QT) as
+  RESULT FROM validation_data_table GROUP BY PHONE_1_ID) WHERE RESULT > 86400
+type: info

@@ -1,0 +1,14 @@
+dataset_id: Call_CDR
+dataset_version: 3
+description: sum( session_duration_qt) group by event_tm
+field: SESSION_DURATION_QT
+id: SESSION_DURATION_QT-SUM_DISTRIBUTION
+id_jira: val-476
+metrics:
+- distribution
+product: Neptuno
+sources: []
+sql: SELECT to_json(collect_list((HOUR, TOTAL))) as distribution FROM (SELECT substring(EVENT_TM,10,2)
+  AS HOUR, CAST(SUM(SESSION_DURATION_QT) AS DECIMAL(30,5)) AS TOTAL FROM validation_data_table
+  GROUP BY HOUR ORDER BY HOUR ASC)
+type: info
