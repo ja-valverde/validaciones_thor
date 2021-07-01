@@ -1,5 +1,5 @@
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: cells per operator_id
   field: OPERATOR_ID
   id: OPERATOR_ID-CELLS_PER_OPERATOR_ID
@@ -11,7 +11,7 @@
     OPERATOR_ID, count(*) as result from validation_data_table group by OPERATOR_ID)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: count number of phone_id with more than 24 hours of traffic
   field: PHONE_1_ID
   id: PHONE_1_ID-COUNT_PHONE_ID_WITH_MORE_24H_TRAFFIC
@@ -23,7 +23,7 @@
     as RESULT FROM validation_data_table GROUP BY PHONE_1_ID) WHERE RESULT > 86400
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: field phone_1_id in entity call_cdr contains prefix or not
   field: PHONE_1_ID
   id: PHONE_1_ID-VALIDATE_NOT_PHONE_PREFIX_IN_NATIONAL_CALLS
@@ -35,7 +35,7 @@
     and (phone_1_id like '+%' or phone_1_id like '00%' or length(phone_1_id) > 9)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: count number of events with duplicated timestamp for the same user
   field: USER_1_ID
   id: USER_1_ID-COUNT_EVENTS_DUPLICATED_TIMESTAMP
@@ -48,7 +48,7 @@
     > 1
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: count events by user percent<0.25
   field: USER_1_ID
   id: USER_1_ID-PERCENTILE_EVENTS_BY_USER(>=0.25)
@@ -62,7 +62,7 @@
     GROUP BY USER_1_ID))
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: count events by user percent>0.95
   field: USER_1_ID
   id: USER_1_ID-PERCENTILE_EVENTS_BY_USER(>=0.95)
@@ -76,7 +76,7 @@
     GROUP BY USER_1_ID))
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: count events by user percent<0.25
   field: USER_1_ID
   id: USER_1_ID-PERCENTILE_EVENTS_BY_USER(<=0.25)
@@ -90,7 +90,7 @@
     GROUP BY USER_1_ID))
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: number of user_1_id per second level geographical area
   field: USER_1_ID
   id: USER_1_ID-USER_1_ID_PER_SECOND_LEVEL_GEO_AREA
@@ -200,7 +200,7 @@
     GROUPED_GEO_AREA_NAME)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: count of cells in call_cdr with cells in catalogue per second level
     geo area
   field: START_CELL_1_ID
@@ -313,7 +313,7 @@
     = G.GEO_AREA_ID) S ON P.MAIN_ID = S.CELL_ID GROUP BY GROUPED_GEO_AREA_ID, GROUPED_GEO_AREA_NAME)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: cells per lac_id
   field: START_CELL_1_ID
   id: START_CELL_1_ID-CELLS_PER_LAC_ID
@@ -329,7 +329,7 @@
     JOIN Cells_Catalogue t2 ON t1.START_CELL_1_ID=t2.CELL_ID) GROUP BY LAC_ID)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: cells per site_type_cd
   field: START_CELL_1_ID
   id: START_CELL_1_ID-CELLS_PER_SITE_TYPE_CD
@@ -345,7 +345,7 @@
     OUTER JOIN Cells_Catalogue t2 ON t1.START_CELL_1_ID=t2.CELL_ID) GROUP BY SITE_TYPE_CD)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: cells per start_cell_1_id
   field: START_CELL_1_ID
   id: START_CELL_1_ID-CELLS_PER_START_CELL_1_ID
@@ -362,7 +362,7 @@
     BY START_CELL_1_ID)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: count of cells without events on  call_cdr
   field: START_CELL_1_ID
   id: START_CELL_1_ID-COUNT_CELLS_WITHOUT_EVENT
@@ -379,7 +379,7 @@
     t2.REFERENCE_ID is null
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: events per second level geographical area
   field: START_CELL_1_ID
   id: START_CELL_1_ID-EVENTS_PER_SECOND_LEVEL_GEO_AREA
@@ -489,7 +489,7 @@
     GROUPED_GEO_AREA_NAME)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: spatial difference per start_cell_1_id
   field: START_CELL_1_ID
   id: START_CELL_1_ID-SPATIAL_PER_START_CELL_1_ID
@@ -600,7 +600,7 @@
     GROUPED_GEO_AREA_ID)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: sum of session_duration when cell_id not cross
   field: START_CELL_1_ID
   id: START_CELL_1_ID-SUM_DURATION_NOT_CROSS_CELL_ID
@@ -616,7 +616,7 @@
     AND A.START_CELL_1_ID IS NOT NULL
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: sum of session_duration when technology_cell_cd not cross
   field: START_CELL_1_ID
   id: START_CELL_1_ID-SUM_DURATION_NOT_CROSS_CELL_CD
@@ -632,7 +632,7 @@
     IS NOT NULL AND A.START_CELL_1_ID IS NOT NULL AND A.TECHNOLOGY_CELL_CD != B.TECHNOLOGY_CELL_CD
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: field phone_2_id in entity call_cdr contains prefix or not
   field: PHONE_2_ID
   id: PHONE_2_ID-VALIDATE_NOT_PHONE_PREFIX_IN_NATIONAL_CALLS
@@ -644,7 +644,7 @@
     and (phone_2_id like '+%' or phone_2_id like '00%' or length(phone_2_id) > 9)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: count event_tm by hour
   field: EVENT_TM
   id: EVENT_TM-COUNT_EVENTS_BY_HOUR
@@ -656,7 +656,7 @@
     AS HOUR, COUNT(*) AS TOTAL FROM validation_data_table GROUP BY HOUR ORDER BY HOUR)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: sum( session_duration_qt) group by event_tm
   field: SESSION_DURATION_QT
   id: SESSION_DURATION_QT-SUM_DISTRIBUTION
@@ -669,7 +669,7 @@
     GROUP BY HOUR ORDER BY HOUR ASC)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: sum all the values for the column session_duration_qt where direction_cd=1
     and roaming_ind = 0
   field: SESSION_DURATION_QT
@@ -682,7 +682,7 @@
     where direction_cd=1 and ROAMING_IND = 0
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: sum of all values for column session_duration_qt where  roaming_ind
     = 0
   field: SESSION_DURATION_QT
@@ -695,7 +695,7 @@
     where ROAMING_IND = 0
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: sum all the values for the column session_duration_qt where direction_cd=2
     and  roaming_ind = 0
   field: SESSION_DURATION_QT
@@ -708,7 +708,7 @@
     where direction_cd=2 and ROAMING_IND = 0
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: traffic in cells that are on catalogue
   field: SESSION_DURATION_QT
   id: SESSION_DURATION_QT-SUM_TRAFFIC_IN_CATALOGUE
@@ -724,7 +724,7 @@
     as CELL_ID FROM Cells_Catalogue WHERE CELL_ID is not null) t2 ON t2.CELL_ID=t1.START_CELL_1_ID)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: cells per roaming_ind
   field: ROAMING_IND
   id: ROAMING_IND-CELLS_PER_ROAMING_IND
@@ -736,7 +736,7 @@
     ROAMING_IND, count(*) as result from validation_data_table group by ROAMING_IND)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: cells per local_technology_cell_des
   field: TECHNOLOGY_CELL_CD
   id: TECHNOLOGY_CELL_CD-CELLS_PER_LOCAL_TECHNOLOGY_CELL_DES
@@ -753,7 +753,7 @@
     GROUP BY LOCAL_TECHNOLOGY_CELL_DES)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: spatial difference per technology_cell_cd
   field: TECHNOLOGY_CELL_CD
   id: TECHNOLOGY_CELL_CD-SPATIAL_PER_TECHNOLOGY_CELL_CD
@@ -867,7 +867,7 @@
     GROUPED_GEO_AREA_NAME, GROUPED_GEO_AREA_ID)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: cells per country_roaming_cd
   field: COUNTRY_ROAMING_CD
   id: COUNTRY_ROAMING_CD-CELLS_PER_COUNTRY_ROAMING_CD
@@ -880,7 +880,7 @@
     GROUP BY COUNTRY_ROAMING_CD)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: percentage of users and traffic (minutes) of call_cdr by not telefnica
     users
   field: USER_1_ID
@@ -899,7 +899,7 @@
     left outer join Mobile_Line on phone_1_id=msisdn_id)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: percentage of users and traffic (minutes) of call_cdr by not telefnica
     users
   field: USER_1_ID
@@ -918,7 +918,7 @@
     left outer join Mobile_Revenue_Monthly on phone_1_id=msisdn_id)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: traffic asociated to cells that links to terminals that are not from
     this cells
   field: TECHNOLOGY_CELL_CD
@@ -946,7 +946,7 @@
     join D_Technology_Cell on LOCAL_TECHNOLOGY_CELL_CD = TECHNOLOGY_CELL_CD)))
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: events lost in call_cdr - d_tacs
   field: TECHNOLOGY_CELL_CD
   id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_01
@@ -964,7 +964,7 @@
     not null and START_CELL_1_ID is not null)) as result
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: events lost in imei_tac - d_tacs
   field: TECHNOLOGY_CELL_CD
   id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_02
@@ -993,7 +993,7 @@
     is not null and TECHNOLOGY_3G_CD is not null)) as result
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: events lost in cells_catalogue - d_technology_cell
   field: TECHNOLOGY_CELL_CD
   id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_03
@@ -1015,7 +1015,7 @@
     result
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: events lost due to unknown technology of terminal or cell
   field: TECHNOLOGY_CELL_CD
   id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_04
@@ -1059,7 +1059,7 @@
     as result
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: events where terminal_technology < cell_technology can't be analyzed
   field: TECHNOLOGY_CELL_CD
   id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_05
@@ -1094,7 +1094,7 @@
     on CELL_ID = START_CELL_1_ID)) as result
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: events where terminal_technology < cell_technology
   field: TECHNOLOGY_CELL_CD
   id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_06
@@ -1131,7 +1131,7 @@
     on CELL_ID = START_CELL_1_ID where TECHNOLOGY_TYPE < GBL_TECHNOLOGY_CELL_CD)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: sum(session_duration) where terminal_technology < cell_technology
   field: TECHNOLOGY_CELL_CD
   id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_07
@@ -1168,7 +1168,7 @@
     on CELL_ID = START_CELL_1_ID where TECHNOLOGY_TYPE < GBL_TECHNOLOGY_CELL_CD)
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: count of rows in imei_tac that has at least one imei_id with several
     tac_id
   field: TECHNOLOGY_CELL_CD
@@ -1184,7 +1184,7 @@
     from IMEI_TAC
   type: info
 - dataset_id: Call_CDR
-  dataset_version: '3'
+  dataset_version: 3
   description: events where terminal_technology < cell_technology can't be analyzed
   field: TECHNOLOGY_CELL_CD
   id: TECHNOLOGY_CELL_CD-COUNT_OUTSIDE_OF_TECHNOLOGY_09
