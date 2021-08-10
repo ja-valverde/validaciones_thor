@@ -9,7 +9,7 @@
   - distribution
   sources:
   - dataset_id: D_Line_Status
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Line_Status
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.LINE_STATUS_DES
     AS VARCHAR(50)), 'NULL'), '-',  NVL(CAST(t2.GBL_LINE_STATUS_ID AS VARCHAR(50)),
@@ -67,7 +67,7 @@
   - distribution
   sources:
   - dataset_id: D_Segment
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Segment
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT  CONCAT(NVL(CAST(t2.SEGMENT_DES
     AS VARCHAR(50),'NULL') , '-', NVL(CAST(t2.GBL_SEGMENT_ID AS VARCHAR(50),'NULL')
@@ -131,10 +131,10 @@
   - distribution
   sources:
   - dataset_id: Customer
-    dataset_version: 5.9.0
+    dataset_version: 5
     name: Customer
   - dataset_id: D_Segment
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Segment
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT  NVL(CAST(t2.GBL_SEGMENT_ID
     AS VARCHAR(50)), 'NULL') AS name, COUNT(DISTINCT t1.CUSTOMER_ID) as result FROM
@@ -166,7 +166,7 @@
   - distribution
   sources:
   - dataset_id: D_Fixed_Line_Technology
-    dataset_version: 5.9.0
+    dataset_version: 5
     name: D_Fixed_Line_Technology
   sql: SELECT to_json(collect_list((name,result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.FIXED_LINE_TECHNOLOGY_DES
     AS VARCHAR(50)), 'NULL'),'-', NVL(CAST(t2.GBL_FIXED_LINE_TECHNOLOGY_ID AS VARCHAR(50)),
@@ -186,7 +186,7 @@
   - distribution
   sources:
   - dataset_id: D_Fixed_Line_Technology
-    dataset_version: 5.9.0
+    dataset_version: 5
     name: D_Fixed_Line_Technology
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.GBL_FIXED_LINE_TECHNOLOGY_ID
     AS VARCHAR(50)), 'NULL'),'-',t1.OFFICIAL_ACTIVE_BASE_IND) AS name, COUNT(t1.SUBSCRIBER_ID
@@ -205,7 +205,7 @@
   - distribution
   sources:
   - dataset_id: D_Fixed_Line_Technology
-    dataset_version: 5.9.0
+    dataset_version: 5
     name: D_Fixed_Line_Technology
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.FIXED_LINE_TECHNOLOGY_DES
     AS VARCHAR(50)), 'NULL'),'-',NVL(CAST(t2.GBL_FIXED_LINE_TECHNOLOGY_ID AS VARCHAR(50)),
@@ -225,7 +225,7 @@
   - distribution
   sources:
   - dataset_id: D_Fixed_Line_Technology
-    dataset_version: 5.9.0
+    dataset_version: 5
     name: D_Fixed_Line_Technology
   sql: SELECT to_json(collect_list((name,result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.GBL_FIXED_LINE_TECHNOLOGY_ID
     AS VARCHAR(50)), 'NULL'),'-', NVL(CAST(t1.OFFICIAL_ACTIVE_BASE_IND AS VARCHAR(50)),
@@ -245,7 +245,7 @@
   - distribution
   sources:
   - dataset_id: D_Fixed_Line_Technology
-    dataset_version: 5.9.0
+    dataset_version: 5
     name: D_Fixed_Line_Technology
   sql: SELECT to_json(collect_list((name,result))) as distribution FROM (SELECT CONCAT(t2.FIXED_LINE_TECHNOLOGY_DES,'-',
     t2.GBL_FIXED_LINE_TECHNOLOGY_ID) AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM
@@ -264,7 +264,7 @@
   - distribution
   sources:
   - dataset_id: D_Fixed_Line_Technology
-    dataset_version: 5.9.0
+    dataset_version: 5
     name: D_Fixed_Line_Technology
   sql: SELECT to_json(collect_list((name,result))) as distribution FROM (SELECT CONCAT(t2.GBL_FIXED_LINE_TECHNOLOGY_ID,'-',
     t1.OFFICIAL_ACTIVE_BASE_IND) AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM
@@ -283,7 +283,7 @@
   - distribution
   sources:
   - dataset_id: D_Segment
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Segment
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.GBL_SEGMENT_ID
     AS VARCHAR(50)), 'NULL'),'-', CASE WHEN NVL(t1.ACCESSES_NUM,0)=0 THEN '0' ELSE
@@ -304,7 +304,7 @@
   - distribution
   sources:
   - dataset_id: D_Segment
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Segment
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.GBL_SEGMENT_ID
     AS VARCHAR(50)), 'NULL'),'-', CASE WHEN NVL(t1.ACCESSES_NUM,0)=0 THEN '0' ELSE
@@ -325,7 +325,7 @@
   - distribution
   sources:
   - dataset_id: D_Segment
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Segment
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.GBL_SEGMENT_ID
     AS VARCHAR(50)), 'NULL'),'-', CASE WHEN NVL(t1.ACCESSES_NUM,0)=0 THEN '0' ELSE
@@ -346,7 +346,7 @@
   - distribution
   sources:
   - dataset_id: D_Fixed_Tariff_Plan
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Fixed_Tariff_Plan
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT NVL(CAST(t2.VOICE_IND
     AS VARCHAR(50)), 'NULL') AS name, COUNT(DISTINCT t1.SUBSCRIBER_ID) as result FROM
@@ -391,7 +391,7 @@
   - distribution
   sources:
   - dataset_id: D_Fixed_Tariff_Plan
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Fixed_Tariff_Plan
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT NVL(CAST(t2.BBAND_IND  AS
     VARCHAR(50)), 'NULL') AS name, COUNT(DISTINCT t1.SUBSCRIBER_ID) as result FROM
@@ -410,7 +410,7 @@
   - distribution
   sources:
   - dataset_id: D_Fixed_Tariff_Plan
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Fixed_Tariff_Plan
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT  NVL(CAST(t2.TV_IND  AS
     VARCHAR(50)), 'NULL') AS name, COUNT(DISTINCT t1.SUBSCRIBER_ID) as result FROM
@@ -488,7 +488,7 @@
   - result
   sources:
   - dataset_id: D_Segment
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Segment
   sql: SELECT COUNT(DISTINCT t1.AGE_SEGMENT_CD) as result FROM validation_data_table
     t1 LEFT JOIN D_Segment t2 ON t1.SEGMENT_ID=t2.SEGMENT_ID WHERE t2.GBL_SEGMENT_ID
@@ -505,10 +505,10 @@
   - distribution
   sources:
   - dataset_id: D_AgeSegment
-    dataset_version: 5.9.0
+    dataset_version: 5
     name: D_AgeSegment
   - dataset_id: D_Segment
-    dataset_version: 6.0.0
+    dataset_version: 6
     name: D_Segment
   sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT NVL(CAST(t2.TV_IND  AS
     VARCHAR(50)), 'NULL') AS name, COUNT(DISTINCT t1.SUBSCRIBER_ID) as result FROM
