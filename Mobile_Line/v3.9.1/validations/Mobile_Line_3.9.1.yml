@@ -6,6 +6,7 @@
   id_jira: pdep-27
   metrics:
   - result
+  product: CBD,AXIA,NBA
   sources: []
-  sql: SELECT COUNT(MSISDN_ID) AS result FROM validation_data_table WHERE SEGMENT_ID=-1
+  sql: 1SELECT COUNT(MSISDN_ID) AS result FROM validation_data_table WHERE SEGMENT_ID=-1
   type: info
