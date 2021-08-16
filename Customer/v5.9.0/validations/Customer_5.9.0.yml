@@ -1,0 +1,17 @@
+- dataset_id: Customer
+  dataset_version: 5
+  description: distinct customer_id that not cross fixed_line
+  field: CUSTOMER_ID
+  id: CUSTOMER_ID-CUSTOMER_ID_NOT_CROSS_WITH_FIXED_LINE
+  id_jira: pdep-28
+  metrics:
+  - result
+  product: CBD
+  sources:
+  - dataset_id: Fixed_Line
+    dataset_version: 5
+    name: Fixed_Line
+  sql: SELECT COUNT(DISTINCT t1.CUSTOMER_ID) as result FROM validation_data_table
+    t1 LEFT JOIN Fixed_Line t2 ON t1.CUSTOMER_ID=t2.CUSTOMER_ID WHERE t2.CUSTOMER_ID
+    IS NULL
+  type: info
