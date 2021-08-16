@@ -1,0 +1,739 @@
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of registries ditributed by line_status_des (d_line_status)
+    and gbl_line_status_des (d_gbl_line_status)
+  field: SUBSCRIBER_ID
+  id: SUBSCRIBER_ID-DISTRIBUTION_BY_LINE_STATUS_DES_AND_GBL_LINE_STATUS_DES
+  id_jira: val-568
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Line_Status
+    dataset_version: 6
+    name: D_Line_Status
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.LINE_STATUS_DES
+    AS VARCHAR(50)), 'NULL'), '-',  NVL(CAST(t2.GBL_LINE_STATUS_ID AS VARCHAR(50)),
+    'NULL')) AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM validation_data_table
+    t1 LEFT JOIN D_LINE_STATUS t2 ON t1.LINE_STATUS_ID=t2.LINE_STATUS_ID GROUP BY
+    t2.LINE_STATUS_DES, t2.GBL_LINE_STATUS_ID)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of registries ditributed by official_active_base_bband_ind
+  field: SUBSCRIBER_ID
+  id: SUBSCRIBER_ID-DISTRIBUTION_BY_OFFICIAL_ACTIVE_BASE_BBAND_IND
+  id_jira: val-569
+  metrics:
+  - distribution
+  product: ''
+  sources: []
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT NVL(CAST(t1.OFFICIAL_ACTIVE_BASE_BBAND_IND
+    AS VARCHAR(50)), 'NULL') AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM validation_data_table
+    t1 GROUP BY t1.OFFICIAL_ACTIVE_BASE_BBAND_IND)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of registries ditributed by official_active_base_ind
+  field: SUBSCRIBER_ID
+  id: SUBSCRIBER_ID-DISTRIBUTION_BY_OFFICIAL_ACTIVE_BASE_IND
+  id_jira: val-570
+  metrics:
+  - distribution
+  product: ''
+  sources: []
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT NVL(CAST(t1.OFFICIAL_ACTIVE_BASE_IND
+    AS VARCHAR(50)), 'NULL') AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM validation_data_table
+    t1 GROUP BY t1.OFFICIAL_ACTIVE_BASE_IND)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of registries ditributed by official_active_base_tv_ind
+  field: SUBSCRIBER_ID
+  id: SUBSCRIBER_ID-DISTRIBUTION_BY_OFFICIAL_ACTIVE_BASE_TV_IND
+  id_jira: val-571
+  metrics:
+  - distribution
+  product: ''
+  sources: []
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT NVL(CAST(t1.OFFICIAL_ACTIVE_BASE_TV_IND
+    AS VARCHAR(50)), 'NULL') AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM validation_data_table
+    t1 GROUP BY t1.OFFICIAL_ACTIVE_BASE_TV_IND),
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of registries ditributed by segment_des (d_segment) and global_segment_des
+    (d_gbl_segment)
+  field: SUBSCRIBER_ID
+  id: SUBSCRIBER_ID-DISTRIBUTION_BY_SEGMENT_DES_AND_GLOBAL_SEGMENT_DES
+  id_jira: val-572
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Segment
+    dataset_version: 6
+    name: D_Segment
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT  CONCAT(NVL(CAST(t2.SEGMENT_DES
+    AS VARCHAR(50),'NULL') , '-', NVL(CAST(t2.GBL_SEGMENT_ID AS VARCHAR(50),'NULL')
+    ) AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM validation_data_table t1 LEFT
+    JOIN D_Segment t2 ON t1.SEGMENT_ID=t2.SEGMENT_ID GROUP BY t2.SEGMENT_DES, t2.GBL_SEGMENT_ID)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different phone_id
+  field: PHONE_ID
+  id: PHONE_ID-DISTINCT
+  id_jira: val-573
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.PHONE_ID ) as result FROM validation_data_table t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different administra_id
+  field: ADMINISTRA_ID
+  id: ADMINISTRA_ID-DISTINCT
+  id_jira: val-574
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.ADMINISTRA_ID ) as result FROM validation_data_table
+    t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of customer_id informed at -1
+  field: CUSTOMER_ID
+  id: CUSTOMER_ID-COUNT_MINUS_ONE
+  id_jira: val-575
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(1) as result FROM validation_data_table t1 WHERE t1.CUSTOMER_ID='-1'
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different customer_id
+  field: CUSTOMER_ID
+  id: CUSTOMER_ID-DISTINCT
+  id_jira: val-576
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.CUSTOMER_ID ) as result FROM validation_data_table
+    t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of registries that does not cross with customer ditributed by
+    global_segment_des (d_gbl_segment)
+  field: CUSTOMER_ID
+  id: CUSTOMER_ID-DISTRIBUTION_BY_GLOBAL_SEGMENT_DES_NOT_CROSS
+  id_jira: val-577
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: Customer
+    dataset_version: 5
+    name: Customer
+  - dataset_id: D_Segment
+    dataset_version: 6
+    name: D_Segment
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT  NVL(CAST(t2.GBL_SEGMENT_ID
+    AS VARCHAR(50)), 'NULL') AS name, COUNT(DISTINCT t1.CUSTOMER_ID) as result FROM
+    validation_data_table t1 LEFT JOIN D_SEGMENT t2 ON t1.SEGMENT_ID=t2.SEGMENT_ID
+    LEFT JOIN CUSTOMER t4 ON t1.CUSTOMER_ID=t4.CUSTOMER_ID WHERE t4.CUSTOMER_ID IS
+    NULL GROUP BY  t2.GBL_SEGMENT_ID)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different customer_id
+  field: SEGMENT_ID
+  id: SEGMENT_ID-DISTINCT
+  id_jira: val-578
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.SEGMENT_ID ) as result FROM validation_data_table
+    t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of distinct subscriber_id that does not cross with d_fixed_line_technology
+    ditributed by fixed_line_technology_des and gbl_fixed_line_technology_des by the
+    field fixed_line_technology_id
+  field: FIXED_VOICE_TECHNOLOGY_ID
+  id: FIXED_VOICE_TECHNOLOGY_ID-DISTRIBUTION_BY_FIXED_LINE_TECHNOLOGY_DES_AND_GBL_FIXED_LINE_TECHNOLOGY_DES_NOT_CROSS
+  id_jira: val-579
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Fixed_Line_Technology
+    dataset_version: 5
+    name: D_Fixed_Line_Technology
+  sql: SELECT to_json(collect_list((name,result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.FIXED_LINE_TECHNOLOGY_DES
+    AS VARCHAR(50)), 'NULL'),'-', NVL(CAST(t2.GBL_FIXED_LINE_TECHNOLOGY_ID AS VARCHAR(50)),
+    'NULL')) AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM validation_data_table
+    t1 LEFT JOIN D_Fixed_Line_Technology t2 ON t1.FIXED_VOICE_TECHNOLOGY_ID=t2.FIXED_LINE_TECHNOLOGY_ID
+    WHERE t1.FIXED_VOICE_TECHNOLOGY_ID IS NOT NULL GROUP BY t2.FIXED_LINE_TECHNOLOGY_DES,
+    t2.GBL_FIXED_LINE_TECHNOLOGY_ID)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different subscriber_id when fixed_line_technology_id not
+    null ditributed by gbl_fixed_line_technology_des and official_active_base_ind
+  field: FIXED_VOICE_TECHNOLOGY_ID
+  id: FIXED_VOICE_TECHNOLOGY_ID-DISTRIBUTION_BY_GBL_FIXED_LINE_TECHNOLOGY_DES_AND_OFFICIAL_ACTIVE_BASE_IND_NOT_NULL
+  id_jira: val-580
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Fixed_Line_Technology
+    dataset_version: 5
+    name: D_Fixed_Line_Technology
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.GBL_FIXED_LINE_TECHNOLOGY_ID
+    AS VARCHAR(50)), 'NULL'),'-',t1.OFFICIAL_ACTIVE_BASE_IND) AS name, COUNT(t1.SUBSCRIBER_ID
+    ) as result FROM validation_data_table t1 LEFT JOIN D_Fixed_Line_Technology t2
+    ON t1.FIXED_VOICE_TECHNOLOGY_ID=t2.FIXED_LINE_TECHNOLOGY_ID WHERE t1.FIXED_VOICE_TECHNOLOGY_ID
+    IS NOT NULL GROUP BY t2.GBL_FIXED_LINE_TECHNOLOGY_ID, t1.OFFICIAL_ACTIVE_BASE_IND)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different subscriber_id when fixed_bband_technology_id not
+    null ditributed by fixed_line_technology_des and gbl_fixed_line_technology_des
+  field: FIXED_BBAND_TECHNOLOGY_ID
+  id: FIXED_BBAND_TECHNOLOGY_ID-DISTRIBUTION_BY_FIXED_LINE_TECHNOLOGY_DES_AND_GBL_FIXED_LINE_TECHNOLOGY_DES_NOT_NULL
+  id_jira: val-581
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Fixed_Line_Technology
+    dataset_version: 5
+    name: D_Fixed_Line_Technology
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.FIXED_LINE_TECHNOLOGY_DES
+    AS VARCHAR(50)), 'NULL'),'-',NVL(CAST(t2.GBL_FIXED_LINE_TECHNOLOGY_ID AS VARCHAR(50)),
+    'NULL')) AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM validation_data_table
+    t1 LEFT JOIN D_Fixed_Line_Technology t2 ON t1.FIXED_VOICE_TECHNOLOGY_ID=t2.FIXED_LINE_TECHNOLOGY_ID
+    WHERE t1.FIXED_BBAND_TECHNOLOGY_ID IS NOT NULL GROUP BY t2.FIXED_LINE_TECHNOLOGY_DES,
+    t2.GBL_FIXED_LINE_TECHNOLOGY_ID)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different subscriber_id when fixed_bband_technology_id not
+    null ditributed by gbl_fixed_line_technology_des and official_active_base_ind
+  field: FIXED_BBAND_TECHNOLOGY_ID
+  id: FIXED_BBAND_TECHNOLOGY_ID-DISTRIBUTION_BY_GBL_FIXED_LINE_TECHNOLOGY_DES_AND_OFFICIAL_ACTIVE_BASE_IND_NOT_NULL
+  id_jira: val-582
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Fixed_Line_Technology
+    dataset_version: 5
+    name: D_Fixed_Line_Technology
+  sql: SELECT to_json(collect_list((name,result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.GBL_FIXED_LINE_TECHNOLOGY_ID
+    AS VARCHAR(50)), 'NULL'),'-', NVL(CAST(t1.OFFICIAL_ACTIVE_BASE_IND AS VARCHAR(50)),
+    'NULL')) AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM validation_data_table
+    t1 LEFT JOIN D_Fixed_Line_Technology t2 ON t1.FIXED_VOICE_TECHNOLOGY_ID=t2.FIXED_LINE_TECHNOLOGY_ID
+    WHERE t1.FIXED_BBAND_TECHNOLOGY_ID IS NOT NULL GROUP BY t2.GBL_FIXED_LINE_TECHNOLOGY_ID,
+    t1.OFFICIAL_ACTIVE_BASE_IND)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different subscriber_id when fixed_video_technology_id not
+    null ditributed by fixed_line_technology_des and gbl_fixed_line_technology_des
+  field: FIXED_VIDEO_TECHNOLOGY_ID
+  id: FIXED_VIDEO_TECHNOLOGY_ID-DISTRIBUTION_BY_FIXED_LINE_TECHNOLOGY_DES_AND_GBL_FIXED_LINE_TECHNOLOGY_DES_NOT_NULL
+  id_jira: val-583
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Fixed_Line_Technology
+    dataset_version: 5
+    name: D_Fixed_Line_Technology
+  sql: SELECT to_json(collect_list((name,result))) as distribution FROM (SELECT CONCAT(t2.FIXED_LINE_TECHNOLOGY_DES,'-',
+    t2.GBL_FIXED_LINE_TECHNOLOGY_ID) AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM
+    validation_data_table t1 LEFT JOIN D_Fixed_Line_Technology t2 ON t1.FIXED_VOICE_TECHNOLOGY_ID=t2.FIXED_LINE_TECHNOLOGY_ID
+    WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID IS NOT NULL GROUP BY t2.FIXED_LINE_TECHNOLOGY_DES,
+    t2.GBL_FIXED_LINE_TECHNOLOGY_ID)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different subscriber_id when fixed_video_technology_id not
+    null ditributed by gbl_fixed_line_technology_des and official_active_base_ind
+  field: FIXED_VIDEO_TECHNOLOGY_ID
+  id: FIXED_VIDEO_TECHNOLOGY_ID-DISTRIBUTION_BY_GBL_FIXED_LINE_TECHNOLOGY_DES_AND_OFFICIAL_ACTIVE_BASE_IND_NOT_NULL
+  id_jira: val-584
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Fixed_Line_Technology
+    dataset_version: 5
+    name: D_Fixed_Line_Technology
+  sql: SELECT to_json(collect_list((name,result))) as distribution FROM (SELECT CONCAT(t2.GBL_FIXED_LINE_TECHNOLOGY_ID,'-',
+    t1.OFFICIAL_ACTIVE_BASE_IND) AS name, COUNT(t1.SUBSCRIBER_ID ) as result FROM
+    validation_data_table t1 LEFT JOIN D_Fixed_Line_Technology t2 ON t1.FIXED_VOICE_TECHNOLOGY_ID=t2.FIXED_LINE_TECHNOLOGY_ID
+    WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID IS NOT NULL GROUP BY t2.GBL_FIXED_LINE_TECHNOLOGY_ID,
+    t1.OFFICIAL_ACTIVE_BASE_IND)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different subscriber_id when fixed_bband_technology_id not
+    null ditributed by gbl_segment_des and accesses_num
+  field: ACCESSES_NUM
+  id: ACCESSES_NUM-DISTRIBUTION_BY_FIXED_BBAND_TECHNOLOGY_ID_GBL_SEGMENT_DES_AND_ACCESSES_NUM_NOT_NULL
+  id_jira: val-585
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Segment
+    dataset_version: 6
+    name: D_Segment
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.GBL_SEGMENT_ID
+    AS VARCHAR(50)), 'NULL'),'-', CASE WHEN NVL(t1.ACCESSES_NUM,0)=0 THEN '0' ELSE
+    CASE WHEN NVL(t1.ACCESSES_NUM,0)=1 THEN '1' ELSE '>1' END END) AS name, COUNT(DISTINCT
+    t1.SUBSCRIBER_ID) as result FROM validation_data_table t1 LEFT JOIN D_Segment
+    t2 ON t1.SEGMENT_ID=t2.SEGMENT_ID WHERE t1.FIXED_BBAND_TECHNOLOGY_ID IS NOT NULL
+    AND NVL(t1.ACCESSES_NUM,0)>=0 GROUP BY t2.GBL_SEGMENT_ID, CASE WHEN NVL(t1.ACCESSES_NUM,0)=0
+    THEN '0' ELSE CASE WHEN NVL(t1.ACCESSES_NUM,0)=1 THEN '1' ELSE '>1' END END)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different subscriber_id when fixed_video_technology_id not
+    null ditributed by gbl_segment_des and accesses_num
+  field: ACCESSES_NUM
+  id: ACCESSES_NUM-DISTRIBUTION_BY_ FIXED_VIDEO_TECHNOLOGY_ID_GBL_SEGMENT_DES_AND_ACCESSES_NUM_NOT_NULL
+  id_jira: val-586
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Segment
+    dataset_version: 6
+    name: D_Segment
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.GBL_SEGMENT_ID
+    AS VARCHAR(50)), 'NULL'),'-', CASE WHEN NVL(t1.ACCESSES_NUM,0)=0 THEN '0' ELSE
+    CASE WHEN NVL(t1.ACCESSES_NUM,0)=1 THEN '1' ELSE '>1' END END) AS name, COUNT(DISTINCT
+    t1.SUBSCRIBER_ID) as result FROM validation_data_table t1 LEFT JOIN D_Segment
+    t2 ON t1.SEGMENT_ID=t2.SEGMENT_ID WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID IS NOT NULL
+    AND NVL(t1.ACCESSES_NUM,0)>=0 GROUP BY t2.GBL_SEGMENT_ID, CASE WHEN NVL(t1.ACCESSES_NUM,0)=0
+    THEN '0' ELSE CASE WHEN NVL(t1.ACCESSES_NUM,0)=1 THEN '1' ELSE '>1' END END)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different subscriber_id when fixed_voice_technology_id not
+    null ditributed by gbl_segment_des and accesses_num
+  field: ACCESSES_NUM
+  id: ACCESSES_NUM-DISTRIBUTION_BY_FIXED_VOICE_TECHNOLOGY_ID_GBL_SEGMENT_DES_AND_ACCESSES_NUM_NOT_NULL
+  id_jira: val-587
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Segment
+    dataset_version: 6
+    name: D_Segment
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT CONCAT(NVL(CAST(t2.GBL_SEGMENT_ID
+    AS VARCHAR(50)), 'NULL'),'-', CASE WHEN NVL(t1.ACCESSES_NUM,0)=0 THEN '0' ELSE
+    CASE WHEN NVL(t1.ACCESSES_NUM,0)=1 THEN '1' ELSE '>1' END END) AS name, COUNT(DISTINCT
+    t1.SUBSCRIBER_ID) as result FROM validation_data_table t1 LEFT JOIN D_Segment
+    t2 ON t1.SEGMENT_ID=t2.SEGMENT_ID WHERE t1.FIXED_VOICE_TECHNOLOGY_ID IS NOT NULL
+    AND NVL(t1.ACCESSES_NUM,0)>=0 GROUP BY t2.GBL_SEGMENT_ID, CASE WHEN NVL(t1.ACCESSES_NUM,0)=0
+    THEN '0' ELSE CASE WHEN NVL(t1.ACCESSES_NUM,0)=1 THEN '1' ELSE '>1' END END)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different subscriber_id when fixed_voice_technology_id not
+    null ditributed by voice_ind
+  field: TARIFF_PLAN_ID
+  id: TARIFF_PLAN_ID-DISTRIBUTION_BY_VOICE_IND_NOT_NULL
+  id_jira: val-588
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Fixed_Tariff_Plan
+    dataset_version: 6
+    name: D_Fixed_Tariff_Plan
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT NVL(CAST(t2.VOICE_IND
+    AS VARCHAR(50)), 'NULL') AS name, COUNT(DISTINCT t1.SUBSCRIBER_ID) as result FROM
+    validation_data_table t1 LEFT JOIN D_Fixed_Tariff_Plan t2 ON t1.TARIFF_PLAN_ID=t2.TARIFF_PLAN_ID
+    WHERE t1.FIXED_VOICE_TECHNOLOGY_ID IS NOT NULL GROUP BY t2.VOICE_IND)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different tariff_plan_id when fixed_voice_technology_id is
+    not null
+  field: TARIFF_PLAN_ID
+  id: TARIFF_PLAN_ID-DISTINCT_TARIFF_PLAN_ID_NOT_NULL
+  id_jira: val-589
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.TARIFF_PLAN_ID ) as result FROM validation_data_table
+    t1 WHERE t1.FIXED_VOICE_TECHNOLOGY_ID IS NOT NULL
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different bband_tariff_plan_id when fixed_bband_technology_id
+    is not null
+  field: BBAND_TARIFF_PLAN_ID
+  id: BBAND_TARIFF_PLAN_ID-DISTINCT_BBAND_TARIFF_PLAN_ID_NOT_NUUL
+  id_jira: val-590
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.BBAND_TARIFF_PLAN_ID ) as result FROM validation_data_table
+    t1 WHERE t1.FIXED_BBAND_TECHNOLOGY_ID IS NOT NULL
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: distribution of number of distinct subscriber_id by bband_ind (d_fixed_tariff_plan)
+    when fixed_bband_technology_id is not null
+  field: BBAND_TARIFF_PLAN_ID
+  id: BBAND_TARIFF_PLAN_ID-DISTRIBUTION_SUBSCRIBER_ID_BY_BBAND_IND_FIXED_BBAND_TECHNOLOGY_ID_NOT
+    NULL
+  id_jira: val-591
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Fixed_Tariff_Plan
+    dataset_version: 6
+    name: D_Fixed_Tariff_Plan
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT NVL(CAST(t2.BBAND_IND  AS
+    VARCHAR(50)), 'NULL') AS name, COUNT(DISTINCT t1.SUBSCRIBER_ID) as result FROM
+    validation_data_table t1 LEFT JOIN D_Fixed_Tariff_Plan t2 ON t1.TARIFF_PLAN_ID=t2.TARIFF_PLAN_ID
+    WHERE t1.FIXED_VOICE_TECHNOLOGY_ID IS NOT NULL GROUP BY t2.BBAND_IND)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: distribution of number of distinct subscriber_id by tv_ind (d_fixed_tariff_plan)
+    when fixed_video_technology_id is not null
+  field: TV_TARIFF_PLAN_ID
+  id: TV_TARIFF_PLAN_ID-DISTRIBUTION_SUBSCRIBER_ID_BY_TV_IND_FIXED_VIDEO_TECHNOLOGY_ID_NOT
+    NULL
+  id_jira: val-592
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_Fixed_Tariff_Plan
+    dataset_version: 6
+    name: D_Fixed_Tariff_Plan
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT  NVL(CAST(t2.TV_IND  AS
+    VARCHAR(50)), 'NULL') AS name, COUNT(DISTINCT t1.SUBSCRIBER_ID) as result FROM
+    validation_data_table t1 LEFT JOIN D_Fixed_Tariff_Plan t2 ON t1.TARIFF_PLAN_ID=t2.TARIFF_PLAN_ID
+    WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID IS NOT NULL GROUP BY t2.TV_IND)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different tv_tariff_plan_id when fixed_video_technology_id
+    is not null
+  field: TV_TARIFF_PLAN_ID
+  id: TV_TARIFF_PLAN_ID-DISTINCT_TV_TARIFF_PLAN_ID_ID_NOT_NULL
+  id_jira: val-593
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.TV_TARIFF_PLAN_ID) as result FROM validation_data_table
+    t1 WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID IS NOT NULL
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different commercial_tariff_id
+  field: COMMERCIAL_TARIFF_ID
+  id: COMMERCIAL_TARIFF_ID-DISTINCT
+  id_jira: val-594
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.COMMERCIAL_TARIFF_ID) as result FROM validation_data_table
+    t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different geo_area_id
+  field: GEO_AREA_ID
+  id: GEO_AREA_ID-DISTINCT
+  id_jira: val-595
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.GEO_AREA_ID) as result FROM validation_data_table
+    t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: maximum of birth_dt (in years)
+  field: BIRTH_DT
+  id: BIRTH_DT-MAX_YEARS
+  id_jira: val-596
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT MAX(NVL(SUBSTRING(t1.BIRTH_DT,1,4),'0000'), 'NULL') as result FROM validation_data_table
+    t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: minimum of birth_dt (in years)
+  field: BIRTH_DT
+  id: BIRTH_DT-MIN_YEARS
+  id_jira: val-597
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT MIN(NVL(SUBSTRING(t1.BIRTH_DT,1,4),'0000'), 'NULL') as result FROM validation_data_table
+    t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of distinct age_segment_cd customer segment
+  field: AGE_SEGMENT_CD
+  id: AGE_SEGMENT_CD-DISTINCT_CONSUMER_D_SEGMENT
+  id_jira: val-598
+  metrics:
+  - result
+  product: ''
+  sources:
+  - dataset_id: D_Segment
+    dataset_version: 6
+    name: D_Segment
+  sql: SELECT COUNT(DISTINCT t1.AGE_SEGMENT_CD) as result FROM validation_data_table
+    t1 LEFT JOIN D_Segment t2 ON t1.SEGMENT_ID=t2.SEGMENT_ID WHERE t2.GBL_SEGMENT_ID
+    = 'Consumer'
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: distribution of distinct subscriber_id by age_segment_id (d_agesegment),
+    customer segment
+  field: AGE_SEGMENT_CD
+  id: AGE_SEGMENT_CD-DISTRIBUTION_SUBSCRIBER_ID_BY_AGE_SEGMENT_ID
+  id_jira: val-599
+  metrics:
+  - distribution
+  product: ''
+  sources:
+  - dataset_id: D_AgeSegment
+    dataset_version: 5
+    name: D_AgeSegment
+  - dataset_id: D_Segment
+    dataset_version: 6
+    name: D_Segment
+  sql: SELECT to_json(collect_list((name, result))) as distribution FROM (SELECT NVL(CAST(t2.TV_IND  AS
+    VARCHAR(50)), 'NULL') AS name, COUNT(DISTINCT t1.SUBSCRIBER_ID) as result FROM
+    validation_data_table t1 LEFT JOIN D_Fixed_Tariff_Plan t2 ON t1.TARIFF_PLAN_ID=t2.TARIFF_PLAN_ID
+    WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID IS NOT NULL GROUP BY t2.TV_IND)
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different engagement_segment_cd
+  field: ENGAGEMENT_SEGMENT_CD
+  id: ENGAGEMENT_SEGMENT_CD-DISTINCT
+  id_jira: val-600
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.ENGAGEMENT_SEGMENT_CD ) as result FROM validation_data_table
+    t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: average of bband_up_speed_qt when fixed_bband_technology_id is not
+    null
+  field: BBAND_UP_SPEED_QT
+  id: BBAND_UP_SPEED_QT-AVG_FIXED_BBAND_TECHNOLOGY_ID_NOT_NULL
+  id_jira: val-601
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT NVL(AVG(t1.BBAND_UP_SPEED_QT),0) as result FROM validation_data_table
+    t1 WHERE t1.FIXED_BBAND_TECHNOLOGY_ID IS NOT NULL
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: average of bband_up_speed_qt when fixed_video_technology_id is not
+    null
+  field: BBAND_UP_SPEED_QT
+  id: BBAND_UP_SPEED_QT-AVG_FIXED_VIDEO_TECHNOLOGY_ID_NOT_NULL
+  id_jira: val-602
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT AVG(NVL(t1.BBAND_UP_SPEED_QT,0)) as result FROM validation_data_table
+    t1 WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID IS NOT NULL
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of registries with bband_up_speed_qt null o zero when fixed_video_technology_id
+    is not null
+  field: BBAND_UP_SPEED_QT
+  id: BBAND_UP_SPEED_QT-COUNT_BBAND_UP_SPEED_QT_NULL_OR_ZERO_FIXED_VIDEO_TECHNOLOGY_ID_NOT_NULL
+  id_jira: val-603
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(1) as result FROM validation_data_table t1 WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID
+    IS NOT NULL AND NVL(t1.BBAND_UP_SPEED_QT,0)=0
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: average of bband_down_speed_qt when fixed_bband_technology_id is not
+    null
+  field: BBAND_DOWN_SPEED_QT
+  id: BBAND_DOWN_SPEED_QT-AVG_FIXED_BBAND_TECHNOLOGY_ID_NOT_NULL
+  id_jira: val-604
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT NVL(AVG(t1.BBAND_DOWN_SPEED_QT),0) as result FROM validation_data_table
+    t1 WHERE t1.FIXED_BBAND_TECHNOLOGY_ID IS NOT NULL
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: average of bband_down_speed_qt when fixed_video_technology_id is not
+    null
+  field: BBAND_DOWN_SPEED_QT
+  id: BBAND_DOWN_SPEED_QT-AVG_FIXED_VIDEO_TECHNOLOGY_ID_NOT_NULL
+  id_jira: val-605
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT AVG(NVL(t1.BBAND_DOWN_SPEED_QT,0)) as result FROM validation_data_table
+    t1 WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID IS NOT NULL
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of registries with bband_down_speed_qt null o zero when fixed_video_technology_id
+    is not null
+  field: BBAND_DOWN_SPEED_QT
+  id: BBAND_DOWN_SPEED_QT-COUNT_BBAND_DOWN_SPEED_QT_NULL_OR_ZERO_FIXED_VIDEO_TECHNOLOGY_ID_NOT_NULL
+  id_jira: val-606
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(1) as result FROM validation_data_table t1 WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID
+    IS NOT NULL AND NVL(t1.BBAND_DOWN_SPEED_QT,0)=0
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: average of bband_symmetric_speed_qt when fixed_bband_technology_id
+    is not null
+  field: BBAND_SYMMETRIC_SPEED_QT
+  id: BBAND_SYMMETRIC_SPEED_QT-AVG_FIXED_BBAND_TECHNOLOGY_ID_NOT_NULL
+  id_jira: val-607
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT AVG(t1.BBAND_SYMMETRIC_SPEED_QT) as result FROM validation_data_table
+    t1 WHERE t1.FIXED_BBAND_TECHNOLOGY_ID IS NOT NULL
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: average of bband_symmetric_speed_qt when fixed_video_technology_id
+    is not null
+  field: BBAND_SYMMETRIC_SPEED_QT
+  id: BBAND_SYMMETRIC_SPEED_QT-AVG_FIXED_VIDEO_TECHNOLOGY_ID_NOT_NULL
+  id_jira: val-608
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT AVG(t1.BBAND_SYMMETRIC_SPEED_QT) as result FROM validation_data_table
+    t1 WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID IS NOT NULL
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of registries with bband_symmetric_speed_qt null o zero when
+    fixed_bband_technology_id is not null
+  field: BBAND_SYMMETRIC_SPEED_QT
+  id: BBAND_SYMMETRIC_SPEED_QT-COUNT_BBAND_SYMMETRIC_SPEED_QT_OR_ZERO_FIXED_BBAND_TECHNOLOGY_ID_NOT_NULL
+  id_jira: val-609
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(1) as result FROM validation_data_table t1 WHERE t1.FIXED_BBAND_TECHNOLOGY_ID
+    IS NOT NULL AND NVL(t1.BBAND_SYMMETRIC_SPEED_QT,0)=0
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of registries with bband_symmetric_speed_qt null o zero when
+    fixed_video_technology_id is not null
+  field: BBAND_SYMMETRIC_SPEED_QT
+  id: BBAND_SYMMETRIC_SPEED_QT-COUNT_BBAND_SYMMETRIC_SPEED_QT_OR_ZERO_FIXED_VIDEO_TECHNOLOGY_ID_NOT_NULL
+  id_jira: val-610
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(1) as result FROM validation_data_table t1 WHERE t1.FIXED_VIDEO_TECHNOLOGY_ID
+    IS NOT NULL AND NVL(t1.BBAND_SYMMETRIC_SPEED_QT,0)=0
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different billing_account_id
+  field: BILLING_ACCOUNT_ID
+  id: BILLING_ACCOUNT_ID-DISTINCT
+  id_jira: val-611
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.BILLING_ACCOUNT_ID) as result FROM validation_data_table
+    t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different central_id
+  field: CENTRAL_ID
+  id: CENTRAL_ID-DISTINCT
+  id_jira: val-612
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.CENTRAL_ID) as result FROM validation_data_table t1
+  type: info
+- dataset_id: Fixed_Line
+  dataset_version: 5
+  description: number of different user_4p_id
+  field: USER_4P_ID
+  id: USER_4P_ID-DISTINCT
+  id_jira: val-613
+  metrics:
+  - result
+  product: ''
+  sources: []
+  sql: SELECT COUNT(DISTINCT t1.USER_4P_ID) as result FROM validation_data_table t1
+  type: info
