@@ -2,11 +2,11 @@
   dataset_version: 5
   description: distinct customer_id that not cross fixed_line
   field: CUSTOMER_ID
-  id: CUSTOMER_ID-CUSTOMER_ID_NOT_CROSS_WITH_FIXED_LINE
+  id: CUSTOMER_ID-CUSTOMER_ID_NOT_CROSS_WITH_FIXED_LINE_X
   id_jira: pdep-28
   metrics:
   - result
-  product: CBD
+  product: CBD,ISCORE
   sources:
   - dataset_id: Fixed_Line
     dataset_version: 5
